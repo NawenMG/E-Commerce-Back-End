@@ -10,7 +10,7 @@ import com.my_app.my_app.dbrel.parametri.ParmQueryProducts;
 import com.my_app.my_app.dbrel.repository.interfacee.ProductsRepI;
 
 @Repository
-public class ProductsRep implements ProductsRepI {
+public class CategoriesRep implements ProductsRepI {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -31,7 +31,7 @@ public class ProductsRep implements ProductsRepI {
         }
 
         // Aggiungi i campi da selezionare (default a '*')
-        sql.append("* FROM Products ");
+        sql.append("* FROM Categories ");
 
         // Aggiungi condizioni WHERE
         if (paramQuery.getCondizioneWhere().isPresent()) {
@@ -142,10 +142,8 @@ public class ProductsRep implements ProductsRepI {
     }
     @Override
     public List<Products> query(ParmQueryProducts parmQuery) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'query'");
     }
-   
     
 }
 

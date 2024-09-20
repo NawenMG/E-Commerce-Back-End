@@ -2,6 +2,7 @@ package com.my_app.my_app.dbrel.model;
 
 import java.time.LocalDate;
 
+
 public class Products {
     private int productId;          
     private String nome;            

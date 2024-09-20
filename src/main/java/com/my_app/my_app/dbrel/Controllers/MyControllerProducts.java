@@ -1,4 +1,4 @@
-package com.my_app.my_app;
+package com.my_app.my_app.dbrel.Controllers;
 
 import java.util.List;
 
@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.model.Products;
-import com.my_app.my_app.dbrel.parametri.ParmQuery;
-import com.my_app.my_app.dbrel.repository.servicee.ProductsSer;
+import com.my_app.my_app.dbrel.parametri.ParmQueryProducts;
+import com.my_app.my_app.dbrel.servicee.ProductsSer;
 
-
+//Database relazionale MySql
+//Controller Tabella Products
 @RestController
-public class MyController {
+public class MyControllerProducts {
     
     @Autowired
-    private ParmQuery parmQuery;
+    private ParmQueryProducts parmQuery;
     @Autowired 
     private  ProductsSer productsSer;
 
@@ -22,44 +23,44 @@ public class MyController {
     public String hello() {
         return "ehi ciao";
     }
-
-    //Database relazionale
     //Query
-    @PostMapping("/query")
-    public String invia(@RequestBody ParmQuery parmQuery) {
+    @PostMapping("/queryProducts")
+    @ResponseBody
+    public String invia(@RequestBody ParmQueryProducts parmQuery) {
         return "Dati inviati alla query";
     }
-    @GetMapping("/query")
+    @GetMapping("/queryProducts")
+    @ResponseBody
     public List<Products> query() {
         List<Products> results = productsSer.queryService(parmQuery);
         return results;        
     }
-
     //Insert
-    @PostMapping("/insert/")
+    @PostMapping("/insertProducts")
+    @ResponseBody
     public String createProduct(@RequestBody Products product) {
         productsSer.insertProductService(product);
         return "Product created successfully!";
     }
-
     //Update
-    @PutMapping("/update/{productId}")
+    @PutMapping("/updateProducts/{productId}")
+    @ResponseBody
     public String updateProduct(@PathVariable int productId, @RequestBody Products product) {
         product.setProductId(productId);  
         productsSer.updateProductService(product);
         return "Product updated successfully!";
     }
-
     //Delete
-    @DeleteMapping("/delete/{productId}")
+    @DeleteMapping("/deleteProducts/{productId}")
+    @ResponseBody
     public String deleteProduct(@PathVariable int productId) {
         productsSer.deleteProductService(productId);
         return "Product deleted successfully!";
     }
-
     //Faker per inserire dei dati
-    @PostMapping("/generate-products")
-    public String generateProducts(@RequestParam int numberOfProducts) {
+    @PostMapping("/fakerProducts/{numberOfProducts}")
+    @ResponseBody
+    public String generateProducts(@PathVariable int numberOfProducts) { //Pathvariable quando immetti un parametro dall'url
         productsSer.saveAllService(numberOfProducts);
         return "Prodotti generati e salvati con successo!";
     }

@@ -1,4 +1,4 @@
-package com.my_app.my_app.dbrel.Factories.Products;
+package com.my_app.my_app.dbrel.Factories.Random;
 
 import com.github.javafaker.Faker;
 import com.my_app.my_app.dbrel.model.Products;

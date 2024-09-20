@@ -2,7 +2,10 @@ package com.my_app.my_app.dbrel.parametri;
 
 import java.util.Optional;
 
-public class ParmQuery {
+import org.springframework.stereotype.Component;
+
+@Component
+public class ParamQuery {
     private boolean distinct = false;
     private Optional<String> condizioneWhere = Optional.empty();
     private Optional<String> valoriWhere = Optional.empty();
@@ -22,33 +25,12 @@ public class ParmQuery {
     private int limit = 40;
     private int offset = limit;
 
-    // Costruttore
-    public ParmQuery(boolean distinct, Optional<String> condizioneWhere, Optional<String> valoriWhere,
-                     Optional<String> boleani, boolean orderBy, Integer top, boolean min, boolean max,
-                     boolean count, boolean avg, boolean sum, boolean all, Optional<String> like,
-                     Optional<String> in, Optional<String[]> between, Optional<String> having,
-                     int limit, int offset) {
-        this.distinct = distinct;
-        this.condizioneWhere = condizioneWhere;
-        this.valoriWhere = valoriWhere;
-        this.boleani = boleani;
-        this.orderBy = orderBy;
-        this.top = top;
-        this.min = min;
-        this.max = max;
-        this.count = count;
-        this.avg = avg;
-        this.sum = sum;
-        this.all = all; 
-        this.like = like;
-        this.in = in;
-        this.between = between;
-        this.having = having;
-        this.limit = limit;
-        this.offset = offset;
+    // Costruttore di default
+    public ParamQuery() {
+        // I valori di default sono già stati impostati
     }
 
-    
+    // Getters e Setters
     public boolean isAll() {
         return all;
     }
@@ -57,7 +39,6 @@ public class ParmQuery {
         this.all = all;
     }
 
-    
     public boolean isDistinct() {
         return distinct;
     }
@@ -193,7 +174,4 @@ public class ParmQuery {
     public void setOffset(int offset) {
         this.offset = offset;
     }
-
-    
 }
-

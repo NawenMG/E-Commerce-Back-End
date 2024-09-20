@@ -1,14 +1,14 @@
-package com.my_app.my_app.dbrel.repository.servicee;
+package com.my_app.my_app.dbrel.servicee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import com.my_app.my_app.dbrel.Factories.Random.ProductsFaker;
 import com.my_app.my_app.dbrel.model.Products;
-import com.my_app.my_app.dbrel.parametri.ParmQuery;
+import com.my_app.my_app.dbrel.parametri.ParmQueryProducts;
 import com.my_app.my_app.dbrel.repository.interfacee.*;
-import com.my_app.my_app.dbrel.Factories.Products.ProductsFaker;
 
 @Service
 public class ProductsSer {
@@ -17,7 +17,7 @@ public class ProductsSer {
     private ProductsRepI productsRepI;
 
     //Query
-    public List<Products> queryService(ParmQuery parmQuery) {
+    public List<Products> queryService(ParmQueryProducts parmQuery) {
         return productsRepI.query(parmQuery);
     }
 
