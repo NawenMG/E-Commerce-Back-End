@@ -1,13 +1,16 @@
-package com.my_app.my_app.factory;
+package com.my_app.my_app.dbrel.Factories.Products;
 
 import com.github.javafaker.Faker;
 import com.my_app.my_app.dbrel.model.Products;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class ProductsFactory {
+@SuppressWarnings("unused")
+public class ProductsFaker {
     private static final Faker faker = new Faker();
 
     public static List<Products> createProducts(int numberOfProducts) {
@@ -15,15 +18,16 @@ public class ProductsFactory {
 
         for (int i = 0; i < numberOfProducts; i++) {
             Products product = new Products(
-                0,  // productId sarà gestito dal database, quindi può essere 0 o non specificato
-                faker.commerce().productName(),  // Nome
-                Double.parseDouble(faker.commerce().price(1.0, 1000000.0)),  // Prezzo
-                faker.lorem().sentence(10),  // Descrizione
-                faker.image().imageUrl(),  // Immagine (URL dell'immagine)
-                faker.number().numberBetween(1, 1000),  // AmountAvailable
-                faker.commerce().department(),  // Categoria
-                LocalDate.now()  // DataDiInserimento
-            );
+    0,  // productId gestito dal database
+              faker.commerce().productName(),  // Nome
+              Double.parseDouble(faker.commerce().price(1.0, 1000000.0)),  // Prezzo
+              faker.lorem().sentence(10),  // Descrizione
+              faker.internet().image(),  // Immagine (URL)
+              faker.number().numberBetween(1, 1000),  // AmountAvailable
+              faker.commerce().department(),  // Categoria
+              faker.date().past(365, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()  
+);
+
             productsList.add(product);
         }
 

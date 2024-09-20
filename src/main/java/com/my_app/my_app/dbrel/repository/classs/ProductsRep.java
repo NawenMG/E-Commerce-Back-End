@@ -1,4 +1,4 @@
-package com.my_app.my_app.dbrel.repository;
+package com.my_app.my_app.dbrel.repository.classs;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.my_app.my_app.dbrel.model.Products;
 import com.my_app.my_app.dbrel.parametri.ParmQuery;
+import com.my_app.my_app.dbrel.repository.interfacee.ProductsRepI;
 
 @Repository
 public class ProductsRep implements ProductsRepI {
@@ -138,7 +139,7 @@ public class ProductsRep implements ProductsRepI {
         String sql = "DELETE FROM products WHERE productId = ?";
         jdbcTemplate.update(sql, productId);
     }
-
+    
 }
 
 

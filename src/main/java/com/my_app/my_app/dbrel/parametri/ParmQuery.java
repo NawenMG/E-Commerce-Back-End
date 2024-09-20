@@ -194,20 +194,6 @@ public class ParmQuery {
         this.offset = offset;
     }
 
-    return jdbcTemplate.query(sql.toString(), new RowMapper<Products>() {
-        @Override
-        public Products mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Products(
-                rs.getInt("ProductID"),
-                rs.getString("Nome"),
-                rs.getDouble("Prezzo"),
-                rs.getString("Descrizione"),
-                rs.getString("Immagine"),
-                rs.getInt("AmountAvailable"),
-                rs.getString("Categoria"),
-                rs.getDate("DataDiInserimento").toLocalDate()
-            );
-        }
-    });
+    
 }
 

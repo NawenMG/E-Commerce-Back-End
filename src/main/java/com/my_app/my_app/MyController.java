@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.model.Products;
 import com.my_app.my_app.dbrel.parametri.ParmQuery;
-import com.my_app.my_app.dbrel.parametri.ParmQueryService;
-import com.my_app.my_app.dbrel.repository.ProductsRep;
-import com.my_app.my_app.dbrel.service.ProductsSer;
+import com.my_app.my_app.dbrel.repository.servicee.ProductsSer;
+
 
 @RestController
 public class MyController {
     
     @Autowired
-    private ParmQueryService parmQueryService;
-    @Autowired ProductsSer productsSer;
+    private ParmQuery parmQuery;
+    @Autowired 
+    private  ProductsSer productsSer;
 
     @GetMapping("/hello")
     public String hello() {
@@ -25,21 +25,20 @@ public class MyController {
 
     //Database relazionale
     //Query
-    @PostMapping("/query/{parmQuery}")
+    @PostMapping("/query")
     public String invia(@RequestBody ParmQuery parmQuery) {
-        parmQueryService.processQuery(parmQuery);
         return "Dati inviati alla query";
     }
     @GetMapping("/query")
     public List<Products> query() {
-        List<Products> results = productsSer.query(parmQueryService);
+        List<Products> results = productsSer.queryService(parmQuery);
         return results;        
     }
 
     //Insert
     @PostMapping("/insert/")
     public String createProduct(@RequestBody Products product) {
-        productsSer.createProduct(product);
+        productsSer.insertProductService(product);
         return "Product created successfully!";
     }
 
@@ -47,23 +46,21 @@ public class MyController {
     @PutMapping("/update/{productId}")
     public String updateProduct(@PathVariable int productId, @RequestBody Products product) {
         product.setProductId(productId);  
-        productsSer.updateProduct(product);
+        productsSer.updateProductService(product);
         return "Product updated successfully!";
     }
 
     //Delete
     @DeleteMapping("/delete/{productId}")
     public String deleteProduct(@PathVariable int productId) {
-        productsSer.deleteProduct(productId);
+        productsSer.deleteProductService(productId);
         return "Product deleted successfully!";
     }
 
     //Faker per inserire dei dati
     @PostMapping("/generate-products")
     public String generateProducts(@RequestParam int numberOfProducts) {
-        productsSer.generateAndSaveProducts(numberOfProducts);
+        productsSer.saveAllService(numberOfProducts);
         return "Prodotti generati e salvati con successo!";
     }
-
-
 }
