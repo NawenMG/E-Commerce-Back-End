@@ -12,6 +12,7 @@ import com.my_app.my_app.dbrel.JDBC.servicee.ProductsSer;
 //Database relazionale MySql
 //Controller Tabella Products
 @RestController
+@RequestMapping("jdbc/products")
 public class MyControllerProducts {
     
     @Autowired
@@ -19,31 +20,31 @@ public class MyControllerProducts {
     @Autowired 
     private  ProductsSer productsSer;
 
-    @GetMapping("/hello")
+    @GetMapping("jdbc/hello")
     public String hello() {
         return "ehi ciao";
     }
     //Query
-    @PostMapping("/queryProducts")
+    @PostMapping("jdbc/queryProducts")
     @ResponseBody
     public String invia(@RequestBody ParmQueryProducts parmQuery) {
         return "Dati inviati alla query";
     }
-    @GetMapping("/queryProducts")
+    @GetMapping("jdbc/queryProducts")
     @ResponseBody
     public List<Products> query() {
         List<Products> results = productsSer.queryService(parmQuery);
         return results;        
     }
     //Insert
-    @PostMapping("/insertProducts")
+    @PostMapping("jdbc/insertProducts")
     @ResponseBody
     public String createProduct(@RequestBody Products product) {
         productsSer.insertProductService(product);
         return "Product created successfully!";
     }
     //Update
-    @PutMapping("/updateProducts/{productId}")
+    @PutMapping("jdbc/updateProducts/{productId}")
     @ResponseBody
     public String updateProduct(@PathVariable int productId, @RequestBody Products product) {
         product.setProductId(productId);  
@@ -51,14 +52,14 @@ public class MyControllerProducts {
         return "Product updated successfully!";
     }
     //Delete
-    @DeleteMapping("/deleteProducts/{productId}")
+    @DeleteMapping("jdbc/deleteProducts/{productId}")
     @ResponseBody
     public String deleteProduct(@PathVariable int productId) {
         productsSer.deleteProductService(productId);
         return "Product deleted successfully!";
     }
     //Faker per inserire dei dati
-    @PostMapping("/fakerProducts/{numberOfProducts}")
+    @PostMapping("jdbc/fakerProducts/{numberOfProducts}")
     @ResponseBody
     public String generateProducts(@PathVariable int numberOfProducts) { //Pathvariable quando immetti un parametro dall'url
         productsSer.saveAllService(numberOfProducts);

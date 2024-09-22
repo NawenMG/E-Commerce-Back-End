@@ -12,6 +12,7 @@ import com.my_app.my_app.dbrel.JDBC.servicee.UsersSer;
 //Database relazionale MySql
 //Controller Tabella Users
 @RestController
+@RequestMapping("jdbc/users")
 public class MyControllerUsers {
 
     @Autowired
@@ -19,19 +20,19 @@ public class MyControllerUsers {
     @Autowired
     private UsersSer usersSer;
 
-    @GetMapping("/hello")
+    @GetMapping("jdbc/hello")
     public String hello() {
         return "ehi ciao";
     }
 
     // Query
-    @PostMapping("/queryUsers")
+    @PostMapping("jdbc/queryUsers")
     @ResponseBody
     public String invia(@RequestBody ParmQueryUsers parmQuery) {
         return "Dati inviati alla query";
     }
 
-    @GetMapping("/queryUsers")
+    @GetMapping("jdbc/queryUsers")
     @ResponseBody
     public List<Users> query() {
         List<Users> results = usersSer.queryService(parmQuery);
@@ -39,7 +40,7 @@ public class MyControllerUsers {
     }
 
     // Insert
-    @PostMapping("/insertUsers")
+    @PostMapping("jdbc/insertUsers")
     @ResponseBody
     public String createUser(@RequestBody Users user) {
         usersSer.insertUserService(user);
@@ -47,7 +48,7 @@ public class MyControllerUsers {
     }
 
     // Update
-    @PutMapping("/updateUsers/{userId}")
+    @PutMapping("jdbc/updateUsers/{userId}")
     @ResponseBody
     public String updateUser(@PathVariable int userId, @RequestBody Users user) {
         user.setUsersID(userId);  
@@ -56,7 +57,7 @@ public class MyControllerUsers {
     }
 
     // Delete
-    @DeleteMapping("/deleteUsers/{userId}")
+    @DeleteMapping("jdbc/deleteUsers/{userId}")
     @ResponseBody
     public String deleteUser(@PathVariable int userId) {
         usersSer.deleteUserService(userId);

@@ -10,7 +10,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryOrders;
 import com.my_app.my_app.dbrel.JDBC.servicee.OrdersSer;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("jdbc/orders")
 public class MyControllerOrders {
 
     @SuppressWarnings("unused")
@@ -20,20 +20,20 @@ public class MyControllerOrders {
     @Autowired
     private OrdersSer ordersSer;
 
-    @GetMapping("/hello")
+    @GetMapping("jdbc/hello")
     public String hello() {
         return "Hello, Orders!";
     }
 
     // Query
-    @PostMapping("/query")
+    @PostMapping("jdbc/query")
     @ResponseBody
     public List<Orders> query(@RequestBody ParmQueryOrders parmQuery) {
         return ordersSer.queryService(parmQuery);
     }
 
     // Insert
-    @PostMapping("/insert")
+    @PostMapping("jdbc/insert")
     @ResponseBody
     public String createOrder(@RequestBody Orders order) {
         ordersSer.insertOrderService(order);
@@ -41,7 +41,7 @@ public class MyControllerOrders {
     }
 
     // Update
-    @PutMapping("/update/{orderId}")
+    @PutMapping("jdbc/update/{orderId}")
     @ResponseBody
     public String updateOrder(@PathVariable int orderId, @RequestBody Orders order) {
         order.setOrderID(orderId);
@@ -50,7 +50,7 @@ public class MyControllerOrders {
     }
 
     // Delete
-    @DeleteMapping("/delete/{orderId}")
+    @DeleteMapping("jdbc/delete/{orderId}")
     @ResponseBody
     public String deleteOrder(@PathVariable int orderId) {
         ordersSer.deleteOrderService(orderId);
@@ -58,7 +58,7 @@ public class MyControllerOrders {
     }
 
     // Faker per generare dati
-    @PostMapping("/faker/{numberOfOrders}")
+    @PostMapping("jdbc/faker/{numberOfOrders}")
     @ResponseBody
     public String generateOrders(@PathVariable int numberOfOrders) {
         ordersSer.saveAllService(numberOfOrders);

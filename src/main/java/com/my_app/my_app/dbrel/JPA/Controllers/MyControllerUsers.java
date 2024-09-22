@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("jpa/api/users")
 public class MyControllerUsers {
 
     @Autowired
     private UsersSer usersSer;
 
     // Endpoint per ottenere gli utenti
-    @PostMapping("/query")
+    @PostMapping("jpa/query")
     public ResponseEntity<List<Users>> query(@RequestBody ParamQueryJpa paramQuery) {
         List<Users> users = usersSer.query(paramQuery);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     // Endpoint per inserire un nuovo utente
-    @PostMapping("/insert")
+    @PostMapping("jpa/insert")
     public ResponseEntity<Void> insert(@RequestBody Users user) {
         usersSer.insert(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Endpoint per aggiornare un utente esistente
-    @PutMapping("/update")
+    @PutMapping("jpa/update")
     public ResponseEntity<Void> update(@RequestBody Users user) {
         usersSer.update(user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Endpoint per eliminare un utente per ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("jpa/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         usersSer.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

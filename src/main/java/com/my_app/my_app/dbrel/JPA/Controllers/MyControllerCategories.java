@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("jpa/api/categories")
 public class MyControllerCategories {
 
     @Autowired
     private CategoriesSer categoriesSer;
 
     // Endpoint per ottenere le categorie
-    @PostMapping("/query")
+    @PostMapping("jpa/query")
     public ResponseEntity<List<Categories>> query(@RequestBody ParamQueryJpa paramQuery) {
         List<Categories> categories = categoriesSer.query(paramQuery);
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     // Endpoint per inserire una nuova categoria
-    @PostMapping("/insert")
+    @PostMapping("jpa/insert")
     public ResponseEntity<Void> insert(@RequestBody Categories categories) {
         categoriesSer.insert(categories);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Endpoint per aggiornare una categoria esistente
-    @PutMapping("/update")
+    @PutMapping("jpa/update")
     public ResponseEntity<Void> update(@RequestBody Categories categories) {
         categoriesSer.update(categories);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Endpoint per eliminare una categoria per ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("jpa/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriesSer.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

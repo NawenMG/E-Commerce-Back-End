@@ -10,7 +10,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryPayments;
 import com.my_app.my_app.dbrel.JDBC.servicee.PaymentsSer;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("jdbc/payments")
 public class MyControllerPayments {
 
     @SuppressWarnings("unused")
@@ -20,20 +20,20 @@ public class MyControllerPayments {
     @Autowired
     private PaymentsSer paymentsSer;
 
-    @GetMapping("/hello")
+    @GetMapping("jdbc/hello")
     public String hello() {
         return "Hello, Payments!";
     }
 
     // Query
-    @PostMapping("/query")
+    @PostMapping("jdbc/query")
     @ResponseBody
     public List<Payments> query(@RequestBody ParmQueryPayments parmQuery) {
         return paymentsSer.queryService(parmQuery);
     }
 
     // Insert
-    @PostMapping("/insert")
+    @PostMapping("jdbc/insert")
     @ResponseBody
     public String createPayment(@RequestBody Payments payment) {
         paymentsSer.insertPaymentService(payment);
@@ -41,7 +41,7 @@ public class MyControllerPayments {
     }
 
     // Update
-    @PutMapping("/update/{paymentsId}")
+    @PutMapping("jdbc/update/{paymentsId}")
     @ResponseBody
     public String updatePayment(@PathVariable int paymentsId, @RequestBody Payments payment) {
         payment.setPaymentsID(paymentsId);  
@@ -50,7 +50,7 @@ public class MyControllerPayments {
     }
 
     // Delete
-    @DeleteMapping("/delete/{paymentsId}")
+    @DeleteMapping("jdbc/delete/{paymentsId}")
     @ResponseBody
     public String deletePayment(@PathVariable int paymentsId) {
         paymentsSer.deletePaymentService(paymentsId);
@@ -58,7 +58,7 @@ public class MyControllerPayments {
     }
 
     // Faker per generare dati
-    @PostMapping("/faker/{numberOfPayments}")
+    @PostMapping("jdbc/faker/{numberOfPayments}")
     @ResponseBody
     public String generatePayments(@PathVariable int numberOfPayments) {
         paymentsSer.saveAllService(numberOfPayments);

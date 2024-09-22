@@ -3,7 +3,6 @@ package com.my_app.my_app.dbrel.JPA.Repository.Classss;
 import com.my_app.my_app.dbrel.JPA.Entity.Categories;
 import com.my_app.my_app.dbrel.JPA.Entity.Orders;
 import com.my_app.my_app.dbrel.JPA.Parametri.ParamQueryJpa;
-import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class CategoriesRep {
 
     @PersistenceContext

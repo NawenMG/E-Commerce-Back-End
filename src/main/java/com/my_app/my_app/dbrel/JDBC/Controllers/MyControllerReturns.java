@@ -10,21 +10,21 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryReturns;
 import com.my_app.my_app.dbrel.JDBC.servicee.ReturnsSer;
 
 @RestController
-@RequestMapping("/returns")
+@RequestMapping("jdbc/returns")
 public class MyControllerReturns {
     
     @Autowired
     private ReturnsSer returnsSer;
 
     // Query
-    @PostMapping("/query")
+    @PostMapping("jdbc/query")
     @ResponseBody
     public List<Returns> query(@RequestBody ParmQueryReturns parmQuery) {
         return returnsSer.queryService(parmQuery);
     }
 
     // Inserisci un nuovo reso
-    @PostMapping("/insert")
+    @PostMapping("jdbc/insert")
     @ResponseBody
     public String createReturn(@RequestBody Returns returns) {
         returnsSer.insertReturnService(returns);
@@ -32,7 +32,7 @@ public class MyControllerReturns {
     }
 
     // Aggiorna un reso esistente
-    @PutMapping("/update/{returnsID}")
+    @PutMapping("jdbc/update/{returnsID}")
     @ResponseBody
     public String updateReturn(@PathVariable int returnsID, @RequestBody Returns returns) {
         returns.setReturnsID(returnsID);
@@ -41,7 +41,7 @@ public class MyControllerReturns {
     }
 
     // Elimina un reso
-    @DeleteMapping("/delete/{returnsID}")
+    @DeleteMapping("jdbc/delete/{returnsID}")
     @ResponseBody
     public String deleteReturn(@PathVariable int returnsID) {
         returnsSer.deleteReturnService(returnsID);
@@ -49,7 +49,7 @@ public class MyControllerReturns {
     }
 
     // Faker per inserire dei dati
-    @PostMapping("/faker/{numberOfReturns}")
+    @PostMapping("jdbc/faker/{numberOfReturns}")
     @ResponseBody
     public String generateReturns(@PathVariable int numberOfReturns) {
         returnsSer.saveAllService(numberOfReturns);

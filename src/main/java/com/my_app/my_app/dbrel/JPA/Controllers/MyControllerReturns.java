@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/returns")
+@RequestMapping("jpa/api/returns")
 public class MyControllerReturns {
 
     @Autowired
     private ReturnsSer returnsSer;
 
     // Endpoint per ottenere i dati dei ritorni
-    @PostMapping("/query")
+    @PostMapping("jpa/query")
     public ResponseEntity<List<Returns>> query(@RequestBody ParamQueryJpa paramQuery) {
         List<Returns> returns = returnsSer.query(paramQuery);
         return new ResponseEntity<>(returns, HttpStatus.OK);
     }
 
     // Endpoint per inserire un nuovo ritorno
-    @PostMapping("/insert")
+    @PostMapping("jpa/insert")
     public ResponseEntity<Void> insert(@RequestBody Returns returns) {
         returnsSer.insert(returns);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Endpoint per aggiornare un ritorno esistente
-    @PutMapping("/update")
+    @PutMapping("jpa/update")
     public ResponseEntity<Void> update(@RequestBody Returns returns) {
         returnsSer.update(returns);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Endpoint per eliminare un ritorno per ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("jpa/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         returnsSer.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

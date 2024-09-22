@@ -10,7 +10,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryCategories;
 import com.my_app.my_app.dbrel.JDBC.servicee.*;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("jdbc/categories")
 public class MyControllerCategories {
 
     @SuppressWarnings("unused")
@@ -20,20 +20,20 @@ public class MyControllerCategories {
     @Autowired
     private CategoriesSer categoriesSer;
 
-    @GetMapping("/hello")
+    @GetMapping("jdbc/hello")
     public String hello() {
         return "Ciao da Categories!";
     }
 
     // Query
-    @PostMapping("/query")
+    @PostMapping("jdbc/query")
     @ResponseBody
     public List<Categories> query(@RequestBody ParmQueryCategories parmQuery) {
         return categoriesSer.queryService(parmQuery);
     }
 
     // Insert
-    @PostMapping("/insert")
+    @PostMapping("jdbc/insert")
     @ResponseBody
     public String createCategory(@RequestBody Categories category) {
         categoriesSer.insertCategoryService(category);
@@ -41,7 +41,7 @@ public class MyControllerCategories {
     }
 
     // Update
-    @PutMapping("/update/{categoriesId}")
+    @PutMapping("jdbc/update/{categoriesId}")
     @ResponseBody
     public String updateCategory(@PathVariable int categoriesId, @RequestBody Categories category) {
         category.setCategoriesID(categoriesId);
@@ -50,7 +50,7 @@ public class MyControllerCategories {
     }
 
     // Delete
-    @DeleteMapping("/delete/{categoriesId}")
+    @DeleteMapping("jdbc/delete/{categoriesId}")
     @ResponseBody
     public String deleteCategory(@PathVariable int categoriesId) {
         categoriesSer.deleteCategoryService(categoriesId);
@@ -58,7 +58,7 @@ public class MyControllerCategories {
     }
 
     // Faker per inserire dati
-    @PostMapping("/faker/{numberOfCategories}")
+    @PostMapping("jdbc/faker/{numberOfCategories}")
     @ResponseBody
     public String generateCategories(@PathVariable int numberOfCategories) {
         // Implementa la logica per generare e salvare categorie fittizie

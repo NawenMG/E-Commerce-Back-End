@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("jpa/api/products")
 public class MyControllerProducts {
 
     @Autowired
     private ProductsSer productsSer;
 
     // Endpoint per ottenere i prodotti
-    @PostMapping("/query")
+    @PostMapping("jpa/query")
     public ResponseEntity<List<Products>> query(@RequestBody ParamQueryJpa paramQuery) {
         List<Products> products = productsSer.query(paramQuery);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     // Endpoint per inserire un nuovo prodotto
-    @PostMapping("/insert")
+    @PostMapping("jpa/insert")
     public ResponseEntity<Void> insert(@RequestBody Products product) {
         productsSer.insert(product);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // Endpoint per aggiornare un prodotto esistente
-    @PutMapping("/update")
+    @PutMapping("jpa/update")
     public ResponseEntity<Void> update(@RequestBody Products product) {
         productsSer.update(product);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Endpoint per eliminare un prodotto per ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("jpa/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         productsSer.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
