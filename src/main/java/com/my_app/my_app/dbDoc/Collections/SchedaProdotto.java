@@ -13,10 +13,8 @@ public class SchedaProdotto {
     private double prezzo;
     private Map<String, Object> campiAggiuntivi = new HashMap<>(); //Per il client che può inserire nuovi campi, e così sfruttare mongodb
 
-    // Costruttore
     public SchedaProdotto() {}
 
-    // Getters e Setters
     public int getIdSchedaProdotto() {
         return idSchedaProdotto;
     }

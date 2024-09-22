@@ -12,20 +12,17 @@ import java.util.Map;
 public class Recensioni {
     @Id
     private int idReview;
-    private String titolo; // Corretto in camelCase
+    private String titolo; 
     private int rate;
     private String body;
-    // Nel recensione inserisci il nome dello user e del product
     private boolean verificadellAcquisto;
     private boolean like;
     private boolean dislike;
-    private List<String> tags = new ArrayList<>(); // Campo per accettare un insieme di valori
+    private List<String> tags = new ArrayList<>(); 
     private Map<String, Object> campiAggiuntivi = new HashMap<>(); // Per il client che può inserire nuovi campi
 
-    // Costruttore
     public Recensioni() {}
 
-    // Getters e Setters
     public int getIdReview() {
         return idReview;
     }
