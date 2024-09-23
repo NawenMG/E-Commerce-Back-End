@@ -21,20 +21,16 @@ public class OrdersRep implements ProductsRepI {
     public List<Products> query(ParamQuery paramQuery) {
         StringBuilder sql = new StringBuilder("SELECT ");
 
-        // Aggiungi DISTINCT se necessario
         if (paramQuery.isDistinct()) {
             sql.append("DISTINCT ");
         }
 
-        // Aggiungi ALL se specificato
         if (paramQuery.isAll()) {
             sql.append("ALL ");
         }
 
-        // Aggiungi i campi da selezionare (default a '*')
         sql.append("* FROM Orders ");
 
-        // Aggiungi condizioni WHERE
         if (paramQuery.getCondizioneWhere().isPresent()) {
             sql.append("WHERE ").append(paramQuery.getCondizioneWhere().get()).append(" ");
         }
@@ -45,12 +41,10 @@ public class OrdersRep implements ProductsRepI {
             sql.append(paramQuery.getBoleani().get()).append(" ");
         }
 
-        // Gestisci l'ordinamento
         if (paramQuery.isOrderBy()) {
             sql.append("ORDER BY ").append(paramQuery.isOrderBy() ? "DESC " : "ASC ");
         }
 
-        // Aggiungi TOP se specificato
         if (paramQuery.getTop() != null) {
             sql.insert(6, "TOP " + paramQuery.getTop() + " ");
         }
@@ -71,12 +65,10 @@ public class OrdersRep implements ProductsRepI {
             sql.insert(6, "SUM ");
         }
 
-        // Aggiungi LIKE se presente
         if (paramQuery.getLike().isPresent() && paramQuery.getCondizioneWhere().isPresent()) {
             sql.append("LIKE ").append(paramQuery.getLike().get()).append(" ");
         }
 
-        // Restituisci i risultati
         return jdbcTemplate.query(sql.toString(), (rs, rowNum) -> new Products(
             rs.getInt("ProductID"),
             rs.getString("Nome"),
