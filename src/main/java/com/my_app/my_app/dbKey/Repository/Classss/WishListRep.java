@@ -16,12 +16,10 @@ import java.util.Map;
 @Repository
 public class WishListRep {
 
-    private final DynamoDBMapper dynamoDBMapper;
-
     @Autowired
-    public WishListRep(DynamoDBMapper dynamoDBMapper) {
-        this.dynamoDBMapper = dynamoDBMapper;
-    }
+    private  DynamoDBMapper dynamoDBMapper;
+
+    
 
     public List<WishList> search(ParamQuery paramQuery) {
         Map<String, String> attributeNames = new HashMap<>();

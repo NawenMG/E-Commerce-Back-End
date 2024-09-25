@@ -16,12 +16,9 @@ import java.util.Map;
 @Repository
 public class CronologiaRep {
 
-    private final DynamoDBMapper dynamoDBMapper;
-
     @Autowired
-    public CronologiaRep(DynamoDBMapper dynamoDBMapper) {
-        this.dynamoDBMapper = dynamoDBMapper;
-    }
+    private  DynamoDBMapper dynamoDBMapper;
+
 
     public List<Cronologia> search(ParamQuery paramQuery) {
         Map<String, String> attributeNames = new HashMap<>();
