@@ -11,7 +11,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryCategories;
 public interface CategoriesRepI {
 
     List<Categories> query(ParmQueryCategories parmQuery);
-    void saveAll(List<Categories> categories);
+    void saveAll(int number);
     void insertCategory(Categories category);
     void updateCategory(Categories category);
     void deleteCategory(int categoriesId);

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.ProductsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Products;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryProducts;
@@ -100,19 +101,24 @@ public class ProductsRep implements ProductsRepI {
     }
 
     // Per implementare il faker
-    public void saveAll(List<Products> products) {
-        String sql = "INSERT INTO Prodotti (Nome, Prezzo, Descrizione, Immagine, AmountAvailable, Categoria, DataDiInserimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        for (Products product : products) {
+    public void saveAll(int number) {
+        String sql = "INSERT INTO Products (ProductId, Nome, Prezzo, Descrizione, Immagine, AmountAvailable, Categoria, DataDiInserimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        ProductsFaker productsFaker = new ProductsFaker();
+
+        for (int i = 0; i < number; i++) {
+            // Genera un prodotto fittizio
+            Products product = productsFaker.generateFakeProduct(number);
+
+            // Salva il prodotto nel database
             jdbcTemplate.update(sql, 
+                product.getProductId(), 
                 product.getNome(), 
                 product.getPrezzo(), 
                 product.getDescrizione(), 
                 product.getImmagine(), 
                 product.getAmountAvailable(), 
                 product.getCategoria(), 
-                product.getDataDiInserimento()
-            );
+                product.getDataDiInserimento());
         }
     }
 

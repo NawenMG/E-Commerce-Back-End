@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.ReturnsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Returns;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryReturns;
@@ -92,16 +93,21 @@ public class ReturnsRep implements ReturnsRepI {
     }
 
     // Save All
-    public void saveAll(List<Returns> returns) {
-        String sql = "INSERT INTO Returns (UsersID, Status, AccettazioneReso, DataRichiesta) VALUES (?, ?, ?, ?)";
-        
-        for (Returns returnObj : returns) {
+     public void saveAll(int number) {
+        String sql = "INSERT INTO Returns (ReturnsID, UsersID, Status, AccettazioneReso, DataRichiesta) VALUES (?, ?, ?, ?, ?)";
+        ReturnsFaker returnsFaker = new ReturnsFaker();
+
+        for (int i = 0; i < number; i++) {
+            // Genera un reso fittizio
+            Returns returnInstance = returnsFaker.generateFakeReturn(number);
+
+            // Salva il reso nel database
             jdbcTemplate.update(sql, 
-                returnObj.getUsersID(), 
-                returnObj.isStatus(), 
-                returnObj.isAccettazioneReso(), 
-                returnObj.getDataRichiesta()
-            );
+                returnInstance.getReturnsID(), 
+                returnInstance.getUsersID(), 
+                returnInstance.isStatus(), 
+                returnInstance.isAccettazioneReso(), 
+                returnInstance.getDataRichiesta());
         }
     }
 

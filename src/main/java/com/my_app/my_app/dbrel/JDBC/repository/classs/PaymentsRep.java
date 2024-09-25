@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.PaymentsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Payments;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryPayments;
@@ -92,16 +93,21 @@ public class PaymentsRep implements PaymentsRepI {
     }
 
     // Per implementare il faker
-    public void saveAll(List<Payments> payments) {
-        String sql = "INSERT INTO Payments (Type, Data, Status, Total) VALUES (?, ?, ?, ?)";
-        
-        for (Payments payment : payments) {
+      public void saveAll(int number) {
+        String sql = "INSERT INTO Payments (PaymentsID, Type, Data, Status, Total) VALUES (?, ?, ?, ?, ?)";
+        PaymentsFaker paymentsFaker = new PaymentsFaker();
+
+        for (int i = 0; i < number; i++) {
+            // Genera un pagamento fittizio
+            Payments payment = paymentsFaker.generateFakePayment(number);
+
+            // Salva il pagamento nel database
             jdbcTemplate.update(sql, 
+                payment.getPaymentsID(), 
                 payment.getType(), 
                 payment.getData(), 
                 payment.isStatus(), 
-                payment.getTotal()
-            );
+                payment.getTotal());
         }
     }
 

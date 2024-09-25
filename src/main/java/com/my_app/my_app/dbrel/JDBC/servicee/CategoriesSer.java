@@ -21,8 +21,8 @@ public class CategoriesSer {
     }
 
     // Servizio per salvare tutte le categorie
-    public void saveAllService(List<Categories> categories) {
-        categoriesRepI.saveAll(categories);
+    public void saveAllService(int number) {
+        categoriesRepI.saveAll(number);
     }
 
     // Insert

@@ -21,8 +21,8 @@ public class ReturnsSer {
     }
 
     // Servizio per il faker
-     public void saveAllService(List<Returns> returns) {
-        returnsRepI.saveAll(returns);
+     public void saveAllService(int number) {
+        returnsRepI.saveAll(number);
     }
 
     // Inserisci un nuovo reso

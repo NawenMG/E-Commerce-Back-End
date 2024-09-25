@@ -21,8 +21,8 @@ public class OrdersSer {
     }
 
     // Servizio per il faker
-     public void saveAllService(List<Orders> orders) {
-        ordersRepI.saveAll(orders);
+     public void saveAllService(int number) {
+        ordersRepI.saveAll(number);
     }
 
     // Inserimento di un ordine

@@ -11,7 +11,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryUsers;
 public interface UsersRepI {
 
     List<Users> query(ParmQueryUsers parmQuery);
-    void saveAll(List<Users> users);
+    void saveAll(int number);
     void insertUser(Users user);
     void updateUser(Users user);
     void deleteUser(int userId);

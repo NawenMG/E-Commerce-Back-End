@@ -11,7 +11,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryProducts;
 public interface ProductsRepI {
 
     List<Products> query(ParmQueryProducts parmQuery);
-    void saveAll(List<Products> products);
+    void saveAll(int number);
     void insertProduct(Products products);
     void updateProduct(Products products);
     void deleteProduct( int productId);

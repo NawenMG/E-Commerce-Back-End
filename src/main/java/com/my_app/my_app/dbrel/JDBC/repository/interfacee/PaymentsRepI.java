@@ -11,7 +11,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryPayments;
 public interface PaymentsRepI {
     
     List<Payments> query(ParmQueryPayments parmQuery);
-    void saveAll(List<Payments> payments);
+    void saveAll(int number);
     void insertPayment(Payments payment);
     void updatePayment(Payments payment);
     void deletePayment(int paymentsId);

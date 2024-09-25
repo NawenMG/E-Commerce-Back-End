@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.my_app.my_app.dbrel.JDBC.Factories.Random.PaymentsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Payments;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryPayments;
 import com.my_app.my_app.dbrel.JDBC.repository.interfacee.PaymentsRepI;
@@ -22,9 +21,8 @@ public class PaymentsSer {
     }
 
     // Servizio per il faker
-    public void saveAllService(int numberOfPayments) {
-        List<Payments> payments = PaymentsFaker.createPayments(numberOfPayments);
-        paymentsRepI.saveAll(payments);
+    public void saveAllService(int number) {
+        paymentsRepI.saveAll(number);
     }
 
     // Inserimento di un pagamento

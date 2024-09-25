@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.CategoriesFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Categories;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryCategories;
@@ -94,13 +95,16 @@ public class CategoriesRep implements CategoriesRepI {
     }
 
     // Per implementare il faker
-    public void saveAll(List<Categories> categories) {
-        String sql = "INSERT INTO Categories (Name) VALUES (?)";
-        
-        for (Categories category : categories) {
-            jdbcTemplate.update(sql, 
-                category.getName()
-            );
+    public void saveAll(int number) {
+        String sql = "INSERT INTO Categories (CategoriesID, Name) VALUES (?, ?)";
+        CategoriesFaker categoriesFaker = new CategoriesFaker();
+    
+        for (int i = 0; i < number; i++) {
+            // Genera una categoria fittizia
+            Categories category = categoriesFaker.generateFakeCategory(number);
+    
+            // Salva la categoria nel database
+            jdbcTemplate.update(sql, category.getCategoriesID(), category.getName());
         }
     }
 

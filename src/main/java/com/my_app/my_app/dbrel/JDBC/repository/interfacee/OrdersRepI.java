@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrdersRepI {
     List<Orders> query(ParmQueryOrders parmQuery);
-    void saveAll(List<Orders> orders);
+    void saveAll(int number);
     void insertOrder(Orders order);
     void updateOrder(Orders order);
     void deleteOrder(int orderId);

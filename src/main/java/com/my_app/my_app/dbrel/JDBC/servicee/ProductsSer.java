@@ -21,8 +21,8 @@ public class ProductsSer {
     }
 
     //Servizio per il faker
-     public void saveAllService(List<Products> products) {
-        productsRepI.saveAll(products);
+     public void saveAllService(int number) {
+        productsRepI.saveAll(number);
     }
 
     //Insert

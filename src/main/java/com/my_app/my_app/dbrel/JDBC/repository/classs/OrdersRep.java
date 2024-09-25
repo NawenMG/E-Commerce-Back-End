@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.OrdersFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Orders;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery; // Assicurati di adattare i parametri se necessario
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryOrders;
@@ -96,11 +97,17 @@ public class OrdersRep implements OrdersRepI {
     }
 
     // Per implementare il faker
-    public void saveAll(List<Orders> orders) {
-        String sql = "INSERT INTO Orders (UsersID, StatoDiSpedizione, DataDiConsegna, DataDiRichiesta, AccettazioneOrdine, Status, Corriere, Posizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        for (Orders order : orders) {
+    public void saveAll(int number) {
+        String sql = "INSERT INTO Orders (OrderID, UsersID, StatoDiSpedizione, DataDiConsegna, DataDiRichiesta, AccettazioneOrdine, Status, Corriere, Posizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        OrdersFaker ordersFaker = new OrdersFaker();
+
+        for (int i = 0; i < number; i++) {
+            // Genera un ordine fittizio
+            Orders order = ordersFaker.generateFakeOrder(number);
+
+            // Salva l'ordine nel database
             jdbcTemplate.update(sql, 
+                order.getOrderID(), 
                 order.getUsersID(), 
                 order.getStatoDiSpedizione(), 
                 order.getDataDiConsegna(), 
@@ -108,8 +115,7 @@ public class OrdersRep implements OrdersRepI {
                 order.isAccettazioneOrdine(), 
                 order.isStatus(), 
                 order.getCorriere(), 
-                order.getPosizione()
-            );
+                order.getPosizione());
         }
     }
 

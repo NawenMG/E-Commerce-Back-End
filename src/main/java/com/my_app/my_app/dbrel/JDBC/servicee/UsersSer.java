@@ -21,8 +21,8 @@ public class UsersSer {
     }
 
     // Servizio per il faker
-    public void saveAllService(List<Users> users) {
-        usersRepI.saveAll(users);
+    public void saveAllService(int number) {
+        usersRepI.saveAll(number);
     }
 
     // Insert

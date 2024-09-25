@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.my_app.my_app.dbrel.JDBC.Factories.Random.UsersFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Users;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryUsers;
@@ -96,20 +97,25 @@ public class UsersRep implements UsersRepI {
     }
 
     // Save All
-    public void saveAll(List<Users> users) {
-        String sql = "INSERT INTO Users (Nome, Cognome, Ruolo, NomeUtente, Email, Password, Immagine, Category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        for (Users user : users) {
+    public void saveAll(int number) {
+        String sql = "INSERT INTO Users (UsersID, Nome, Cognome, Ruolo, NomeUtente, Email, Password, Immagine, Category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        UsersFaker usersFaker = new UsersFaker();
+
+        for (int i = 0; i < number; i++) {
+            // Genera un utente fittizio
+            Users userInstance = usersFaker.generateFakeUser(number);
+
+            // Salva l'utente nel database
             jdbcTemplate.update(sql, 
-                user.getNome(), 
-                user.getCognome(), 
-                user.getRuolo(), 
-                user.getNomeUtente(), 
-                user.getEmail(), 
-                user.getPassword(), 
-                user.getImmagine(), 
-                user.getCategory()
-            );
+                userInstance.getUsersID(), 
+                userInstance.getNome(), 
+                userInstance.getCognome(), 
+                userInstance.getRuolo(), 
+                userInstance.getNomeUtente(), 
+                userInstance.getEmail(), 
+                userInstance.getPassword(), 
+                userInstance.getImmagine(), 
+                userInstance.getCategory());
         }
     }
 
