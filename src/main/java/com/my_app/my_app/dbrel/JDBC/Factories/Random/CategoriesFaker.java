@@ -7,7 +7,7 @@ public class CategoriesFaker {
 
     private Faker faker = new Faker();
 
-    public Categories generateFakeCategory() {
+    public Categories generateFakeCategory(int number) {
         Categories category = new Categories();
 
         category.setCategoriesID(faker.number().numberBetween(1, 1000)); // ID casuale

@@ -10,7 +10,7 @@ public class OrdersFaker {
 
     private Faker faker = new Faker();
 
-    public Orders generateFakeOrder() {
+    public Orders generateFakeOrder(int number) {
         Orders order = new Orders(); 
         order.setOrderID(faker.number().numberBetween(1, 10000)); // ID ordine casuale
         order.setUsersID(faker.number().numberBetween(1, 1000));  // ID utente casuale
@@ -24,4 +24,6 @@ public class OrdersFaker {
 
         return order; 
     }
+
+    
 }

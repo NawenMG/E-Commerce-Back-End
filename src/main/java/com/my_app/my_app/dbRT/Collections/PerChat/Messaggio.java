@@ -2,7 +2,7 @@ package com.my_app.my_app.dbRT.Collections.PerChat;
 
 import java.time.LocalDate;
 
-class Messaggio {
+public class Messaggio {
     private String text; 
     private boolean visualizzazione; 
     private String audio; 

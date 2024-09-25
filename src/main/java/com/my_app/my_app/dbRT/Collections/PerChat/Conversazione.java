@@ -3,7 +3,7 @@ package com.my_app.my_app.dbRT.Collections.PerChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
-class Conversazione {
+ public class Conversazione {
    
     @Autowired
     Messaggio messaggio;

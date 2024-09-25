@@ -7,7 +7,7 @@ public class UsersFaker {
 
     private Faker faker = new Faker();
 
-    public Users generateFakeUser() {
+    public Users generateFakeUser(int number) {
         Users user = new Users(); // Crea un'istanza vuota di Users
 
         // Usa i metodi setter per impostare i valori fittizi

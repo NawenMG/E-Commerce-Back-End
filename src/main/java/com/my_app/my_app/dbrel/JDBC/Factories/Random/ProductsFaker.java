@@ -9,7 +9,7 @@ public class ProductsFaker {
 
     private Faker faker = new Faker();
 
-    public Products generateFakeProduct() {
+    public Products generateFakeProduct(int number) {
         Products product = new Products();
 
         product.setProductId(faker.number().numberBetween(1, 10000));  // ID prodotto casuale

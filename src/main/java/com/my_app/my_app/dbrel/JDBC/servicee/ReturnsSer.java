@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.my_app.my_app.dbrel.JDBC.Factories.Random.ReturnsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Returns;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryReturns;
 import com.my_app.my_app.dbrel.JDBC.repository.interfacee.ReturnsRepI;
@@ -22,8 +21,7 @@ public class ReturnsSer {
     }
 
     // Servizio per il faker
-    public void saveAllService(int numberOfReturns) {
-        List<Returns> returns = ReturnsFaker.createReturns(numberOfReturns);
+     public void saveAllService(List<Returns> returns) {
         returnsRepI.saveAll(returns);
     }
 

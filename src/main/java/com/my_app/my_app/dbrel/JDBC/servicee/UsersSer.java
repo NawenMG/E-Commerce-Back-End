@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.my_app.my_app.dbrel.JDBC.Factories.Random.UsersFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Users;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryUsers;
 import com.my_app.my_app.dbrel.JDBC.repository.interfacee.UsersRepI;
@@ -22,8 +21,7 @@ public class UsersSer {
     }
 
     // Servizio per il faker
-    public void saveAllService(int numberOfUsers) {
-        List<Users> users = UsersFaker.createUsers(numberOfUsers);
+    public void saveAllService(List<Users> users) {
         usersRepI.saveAll(users);
     }
 

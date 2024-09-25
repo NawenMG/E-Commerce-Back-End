@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.my_app.my_app.dbrel.JDBC.Factories.Random.ProductsFaker;
 import com.my_app.my_app.dbrel.JDBC.model.Products;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryProducts;
 import com.my_app.my_app.dbrel.JDBC.repository.interfacee.*;
@@ -22,8 +21,7 @@ public class ProductsSer {
     }
 
     //Servizio per il faker
-    public void saveAllService(int numberOfProducts) {
-        List<Products> products = ProductsFaker.createProducts(numberOfProducts);
+     public void saveAllService(List<Products> products) {
         productsRepI.saveAll(products);
     }
 

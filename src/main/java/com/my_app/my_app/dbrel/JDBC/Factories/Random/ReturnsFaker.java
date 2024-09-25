@@ -9,7 +9,7 @@ public class ReturnsFaker {
 
     private Faker faker = new Faker();
 
-    public Returns generateFakeReturn() {
+    public Returns generateFakeReturn(int number) {
         Returns returnObject = new Returns(); 
 
         
