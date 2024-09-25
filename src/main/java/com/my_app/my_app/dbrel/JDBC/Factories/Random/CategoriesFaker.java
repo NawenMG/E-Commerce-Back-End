@@ -3,24 +3,16 @@ package com.my_app.my_app.dbrel.JDBC.Factories.Random;
 import com.github.javafaker.Faker;
 import com.my_app.my_app.dbrel.JDBC.model.Categories;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CategoriesFaker {
-    private static final Faker faker = new Faker();
 
-    public static List<Categories> createCategories(int numberOfCategories) {
-        List<Categories> categoriesList = new ArrayList<>();
+    private Faker faker = new Faker();
 
-        for (int i = 0; i < numberOfCategories; i++) {
-            Categories category = new Categories(
-                0,  // categoriesID gestito dal database
-                faker.commerce().department()  // Nome della categoria
-            );
+    public Categories generateFakeCategory() {
+        Categories category = new Categories();
 
-            categoriesList.add(category);
-        }
+        category.setCategoriesID(faker.number().numberBetween(1, 1000)); // ID casuale
+        category.setName(faker.commerce().department()); // Nome di una categoria fittizia
 
-        return categoriesList;
+        return category; 
     }
 }

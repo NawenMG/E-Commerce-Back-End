@@ -12,25 +12,9 @@ public class Users {
     private int category;         // Category
 
     public Users(
-        int usersID,
-        String nome,
-        String cognome,
-        String ruolo,
-        String nomeUtente,
-        String email,
-        String password,
-        String immagine,
-        int category
+        
     ) {
-        this.usersID = usersID;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.ruolo = ruolo;
-        this.nomeUtente = nomeUtente;
-        this.email = email;
-        this.password = password;
-        this.immagine = immagine;
-        this.category = category;
+        
     }
 
     // Getter e Setter

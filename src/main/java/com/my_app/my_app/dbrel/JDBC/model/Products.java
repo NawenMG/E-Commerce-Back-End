@@ -3,6 +3,8 @@ package com.my_app.my_app.dbrel.JDBC.model;
 import java.time.LocalDate;
 
 
+
+
 public class Products {
     private int productId;          
     private String nome;            
@@ -14,23 +16,9 @@ public class Products {
     private LocalDate dataDiInserimento; 
 
     public Products(
-        int productId,
-        String nome,
-        double prezzo,
-        String descrizione,
-        String immagine,
-        int amountAvailable,
-        String categoria,
-        LocalDate dataDiInserimento
+       
     ) {
-        this.productId = productId;
-        this.nome = nome;
-        this.prezzo = prezzo;
-        this.descrizione = descrizione;
-        this.immagine = immagine;
-        this.amountAvailable = amountAvailable;
-        this.categoria = categoria;
-        this.dataDiInserimento = dataDiInserimento;
+        
     }
 
     // Getter e Setter

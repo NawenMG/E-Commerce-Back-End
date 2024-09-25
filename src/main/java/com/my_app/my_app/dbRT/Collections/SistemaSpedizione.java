@@ -1,6 +1,5 @@
 package com.my_app.my_app.dbRT.Collections;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.LocalDate;
 
@@ -8,7 +7,6 @@ public class SistemaSpedizione {
     private List<Spedizione> spedizioni;  
 
     public SistemaSpedizione() {
-        this.spedizioni = new ArrayList<>();  
     }
 
     public List<Spedizione> getSpedizioni() {
@@ -31,18 +29,7 @@ class Spedizione {
     private LocalDate timeStamp;                   
     private List<User> utenti;                    
 
-    public Spedizione(int spedizioneID, String aziendaInCaricoPerLaSpedizione, boolean consegna, 
-                      LocalDate dataDiConsegnaPrevista, LocalDate ritardo, String locazioneCorrente, 
-                      List<String> storicoLocazioni, LocalDate timeStamp, List<User> utenti) {
-        this.spedizioneID = spedizioneID;
-        this.aziendaInCaricoPerLaSpedizione = aziendaInCaricoPerLaSpedizione;
-        this.consegna = consegna;
-        this.dataDiConsegnaPrevista = dataDiConsegnaPrevista;
-        this.ritardo = ritardo;
-        this.locazioneCorrente = locazioneCorrente;
-        this.storicoLocazioni = storicoLocazioni;
-        this.timeStamp = timeStamp;
-        this.utenti = utenti;
+    public Spedizione() {
     }
 
     public int getSpedizioneID() {
@@ -127,14 +114,7 @@ class User {
     private String phoneNumber;      
 
     // Costruttore
-    public User(int userID, String nome, String cognome, String email, 
-                String indirizzo, String phoneNumber) {
-        this.userID = userID;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.indirizzo = indirizzo;
-        this.phoneNumber = phoneNumber;
+    public User() {
     }
 
     // Getters e Setters

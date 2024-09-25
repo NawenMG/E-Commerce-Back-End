@@ -4,27 +4,21 @@ import com.github.javafaker.Faker;
 import com.my_app.my_app.dbrel.JDBC.model.Returns;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReturnsFaker {
-    private static final Faker faker = new Faker();
 
-    public static List<Returns> createReturns(int numberOfReturns) {
-        List<Returns> returnsList = new ArrayList<>();
+    private Faker faker = new Faker();
 
-        for (int i = 0; i < numberOfReturns; i++) {
-            Returns returnItem = new Returns(
-                0,  // returnsID gestito dal database
-                faker.number().numberBetween(1, 100),  // usersID (esempio)
-                faker.bool().bool(),  // status (booleano)
-                faker.bool().bool(),  // accettazioneReso (booleano)
-                LocalDate.now().minusDays(faker.number().numberBetween(1, 30))  // dataRichiesta (data recente)
-            );
+    public Returns generateFakeReturn() {
+        Returns returnObject = new Returns(); 
 
-            returnsList.add(returnItem);
-        }
+        
+        returnObject.setReturnsID(faker.number().numberBetween(1, 10000));          // ID del reso casuale
+        returnObject.setUsersID(faker.number().numberBetween(1, 1000));             // ID utente casuale
+        returnObject.setStatus(faker.bool().bool());                                // Stato del reso (true/false)
+        returnObject.setAccettazioneReso(faker.bool().bool());                      // Accettazione del reso (true/false)
+        returnObject.setDataRichiesta(LocalDate.now().minusDays(faker.number().numberBetween(1, 30))); // Data di richiesta casuale negli ultimi 30 giorni
 
-        return returnsList;
+        return returnObject; 
     }
 }

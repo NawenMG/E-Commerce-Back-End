@@ -4,33 +4,23 @@ import com.github.javafaker.Faker;
 import com.my_app.my_app.dbrel.JDBC.model.Products;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings("unused")
 public class ProductsFaker {
-    private static final Faker faker = new Faker();
 
-    public static List<Products> createProducts(int numberOfProducts) {
-        List<Products> productsList = new ArrayList<>();
+    private Faker faker = new Faker();
 
-        for (int i = 0; i < numberOfProducts; i++) {
-            Products product = new Products(
-    0,  // productId gestito dal database
-              faker.commerce().productName(),  // Nome
-              Double.parseDouble(faker.commerce().price(1.0, 1000000.0)),  // Prezzo
-              faker.lorem().sentence(10),  // Descrizione
-              faker.internet().image(),  // Immagine (URL)
-              faker.number().numberBetween(1, 1000),  // AmountAvailable
-              faker.commerce().department(),  // Categoria
-              faker.date().past(365, TimeUnit.DAYS).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()  
-);
+    public Products generateFakeProduct() {
+        Products product = new Products();
 
-            productsList.add(product);
-        }
+        product.setProductId(faker.number().numberBetween(1, 10000));  // ID prodotto casuale
+        product.setNome(faker.commerce().productName());               // Nome del prodotto
+        product.setPrezzo(faker.number().randomDouble(2, 5, 1000));    // Prezzo del prodotto
+        product.setDescrizione(faker.lorem().sentence(10));            // Descrizione casuale del prodotto
+        product.setImmagine(faker.internet().avatar());                // Immagine casuale
+        product.setAmountAvailable(faker.number().numberBetween(0, 100)); // Quantità disponibile casuale
+        product.setCategoria(faker.commerce().department());           // Categoria del prodotto
+        product.setDataDiInserimento(LocalDate.now().minusDays(faker.number().numberBetween(1, 365))); // Data di inserimento casuale
 
-        return productsList;
+        return product; 
     }
 }

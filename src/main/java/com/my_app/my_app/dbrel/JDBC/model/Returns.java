@@ -10,12 +10,8 @@ public class Returns {
     private LocalDate dataRichiesta; // data di richiesta del reso
 
     // Costruttore
-    public Returns(int returnsID, int usersID, boolean status, boolean accettazioneReso, LocalDate dataRichiesta) {
-        this.returnsID = returnsID;
-        this.usersID = usersID;
-        this.status = status;
-        this.accettazioneReso = accettazioneReso;
-        this.dataRichiesta = dataRichiesta;
+    public Returns() {
+        
     }
 
     // Getters e Setters

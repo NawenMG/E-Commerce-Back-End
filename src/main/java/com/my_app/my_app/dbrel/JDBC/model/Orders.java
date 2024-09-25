@@ -15,18 +15,8 @@ public class Orders {
     private String posizione;            // Posizione dell'ordine
 
     // Costruttore
-    public Orders(int orderID, int usersID, LocalTime statoDiSpedizione, LocalDate dataDiConsegna, 
-                  LocalDate dataDiRichiesta, boolean accettazioneOrdine, boolean status, 
-                  String corriere, String posizione) {
-        this.orderID = orderID;
-        this.usersID = usersID;
-        this.statoDiSpedizione = statoDiSpedizione;
-        this.dataDiConsegna = dataDiConsegna;
-        this.dataDiRichiesta = dataDiRichiesta;
-        this.accettazioneOrdine = accettazioneOrdine;
-        this.status = status;
-        this.corriere = corriere;
-        this.posizione = posizione;
+    public Orders() {
+        
     }
 
     // Getters e Setters

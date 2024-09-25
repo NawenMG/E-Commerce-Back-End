@@ -1,6 +1,5 @@
 package com.my_app.my_app.dbRT.Collections;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SistemaNotifiche {
@@ -8,7 +7,6 @@ public class SistemaNotifiche {
 
     // Costruttore
     public SistemaNotifiche() {
-        this.notifiche = new ArrayList<>();  
     }
 
     // Getters e Setters
@@ -32,16 +30,8 @@ class Notifica {
     private String destinatario;      
 
     // Costruttore
-    public Notifica(int notificaID, String text, String audio, String immagine, String video, 
-                    boolean consegna, boolean visualizzazione, String destinatario) {
-        this.notificaID = notificaID;
-        this.text = text;
-        this.audio = audio;
-        this.immagine = immagine;
-        this.video = video;
-        this.consegna = consegna;
-        this.visualizzazione = visualizzazione;
-        this.destinatario = destinatario;
+    public Notifica() {
+       
     }
 
     public int getNotificaID() {

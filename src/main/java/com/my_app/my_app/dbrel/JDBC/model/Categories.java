@@ -4,9 +4,8 @@ public class Categories {
     private int categoriesID;  // Chiave primaria
     private String name;       // Nome della categoria
 
-    public Categories(int categoriesID, String name) {
-        this.categoriesID = categoriesID;
-        this.name = name;
+    public Categories() {
+        
     }
 
     // Getter e Setter

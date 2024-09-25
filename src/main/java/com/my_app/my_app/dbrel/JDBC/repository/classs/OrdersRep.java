@@ -1,24 +1,30 @@
 package com.my_app.my_app.dbrel.JDBC.repository.classs;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.my_app.my_app.dbrel.JDBC.model.Products;
-import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
-import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryProducts;
-import com.my_app.my_app.dbrel.JDBC.repository.interfacee.ProductsRepI;
+import com.my_app.my_app.dbrel.JDBC.model.Orders;
+import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery; // Assicurati di adattare i parametri se necessario
+import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryOrders;
+import com.my_app.my_app.dbrel.JDBC.repository.interfacee.OrdersRepI; // Crea l'interfaccia OrdersRepI se non esiste
 
 @Repository
-public class OrdersRep implements ProductsRepI {
+public class OrdersRep implements OrdersRepI {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-   
-    //Query
-    public List<Products> query(ParamQuery paramQuery) {
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    // Query
+    public List<Orders> query(ParamQuery paramQuery) {
         StringBuilder sql = new StringBuilder("SELECT ");
 
         if (paramQuery.isDistinct()) {
@@ -31,20 +37,25 @@ public class OrdersRep implements ProductsRepI {
 
         sql.append("* FROM Orders ");
 
+        // Condizione WHERE
         if (paramQuery.getCondizioneWhere().isPresent()) {
             sql.append("WHERE ").append(paramQuery.getCondizioneWhere().get()).append(" ");
         }
+
         if (paramQuery.getValoriWhere().isPresent()) {
             sql.append(paramQuery.getValoriWhere().get()).append(" ");
         }
+
         if (paramQuery.getBoleani().isPresent()) {
             sql.append(paramQuery.getBoleani().get()).append(" ");
         }
 
+        // Ordinamento
         if (paramQuery.isOrderBy()) {
             sql.append("ORDER BY ").append(paramQuery.isOrderBy() ? "DESC " : "ASC ");
         }
 
+        // TOP, MIN, MAX, COUNT, AVG, SUM
         if (paramQuery.getTop() != null) {
             sql.insert(6, "TOP " + paramQuery.getTop() + " ");
         }
@@ -65,78 +76,83 @@ public class OrdersRep implements ProductsRepI {
             sql.insert(6, "SUM ");
         }
 
-        if (paramQuery.getLike().isPresent() && paramQuery.getCondizioneWhere().isPresent()) {
-            sql.append("LIKE ").append(paramQuery.getLike().get()).append(" ");
-        }
+        // Esecuzione della query
+        Map<String, Object> params = new HashMap<>();
+        // Popola 'params' se necessario
 
-        return jdbcTemplate.query(sql.toString(), (rs, rowNum) -> new Products(
-            rs.getInt("ProductID"),
-            rs.getString("Nome"),
-            rs.getDouble("Prezzo"),
-            rs.getString("Descrizione"),
-            rs.getString("Immagine"),
-            rs.getInt("AmountAvailable"),
-            rs.getString("Categoria"),
-            rs.getDate("DataDiInserimento").toLocalDate()
-        ));
+        return namedParameterJdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
+            Orders order = new Orders();
+            order.setOrderID(rs.getInt("OrderID"));
+            order.setUsersID(rs.getInt("UsersID"));
+            order.setStatoDiSpedizione(rs.getTime("StatoDiSpedizione").toLocalTime());
+            order.setDataDiConsegna(rs.getDate("DataDiConsegna").toLocalDate());
+            order.setDataDiRichiesta(rs.getDate("DataDiRichiesta").toLocalDate());
+            order.setAccettazioneOrdine(rs.getBoolean("AccettazioneOrdine"));
+            order.setStatus(rs.getBoolean("Status"));
+            order.setCorriere(rs.getString("Corriere"));
+            order.setPosizione(rs.getString("Posizione"));
+            return order;
+        });
     }
-    //Per implementare il faker
-    public void saveAll(List<Products> products) {
-        String sql = "INSERT INTO Prodotti (Nome, Prezzo, Descrizione, Immagine, AmountAvailable, Categoria, DataDiInserimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    // Per implementare il faker
+    public void saveAll(List<Orders> orders) {
+        String sql = "INSERT INTO Orders (UsersID, StatoDiSpedizione, DataDiConsegna, DataDiRichiesta, AccettazioneOrdine, Status, Corriere, Posizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
-        for (Products product : products) {
+        for (Orders order : orders) {
             jdbcTemplate.update(sql, 
-                product.getNome(), 
-                product.getPrezzo(), 
-                product.getDescrizione(), 
-                product.getImmagine(), 
-                product.getAmountAvailable(), 
-                product.getCategoria(), 
-                product.getDataDiInserimento()
+                order.getUsersID(), 
+                order.getStatoDiSpedizione(), 
+                order.getDataDiConsegna(), 
+                order.getDataDiRichiesta(), 
+                order.isAccettazioneOrdine(), 
+                order.isStatus(), 
+                order.getCorriere(), 
+                order.getPosizione()
             );
         }
     }
 
-    //Insert
-    public void insertProduct(Products product) {
-        String sql = "INSERT INTO products (productId, nome, prezzo, descrizione, immagine, amountAvailable, categoria, dataDiInserimento) " +
+    // Insert
+    public void insertOrder(Orders order) {
+        String sql = "INSERT INTO Orders (UsersID, StatoDiSpedizione, DataDiConsegna, DataDiRichiesta, AccettazioneOrdine, Status, Corriere, Posizione) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, 
-            product.getProductId(), 
-            product.getNome(), 
-            product.getPrezzo(), 
-            product.getDescrizione(), 
-            product.getImmagine(), 
-            product.getAmountAvailable(), 
-            product.getCategoria(), 
-            product.getDataDiInserimento());
+            order.getUsersID(), 
+            order.getStatoDiSpedizione(), 
+            order.getDataDiConsegna(), 
+            order.getDataDiRichiesta(), 
+            order.isAccettazioneOrdine(), 
+            order.isStatus(), 
+            order.getCorriere(), 
+            order.getPosizione());
     }
 
-    //Update
-    public void updateProduct(Products product) {
-        String sql = "UPDATE products SET nome = ?, prezzo = ?, descrizione = ?, immagine = ?, amountAvailable = ?, categoria = ?, dataDiInserimento = ? " +
-                     "WHERE productId = ?";
+    // Update
+    public void updateOrder(Orders order) {
+        String sql = "UPDATE Orders SET UsersID = ?, StatoDiSpedizione = ?, DataDiConsegna = ?, DataDiRichiesta = ?, AccettazioneOrdine = ?, Status = ?, Corriere = ?, Posizione = ? " +
+                     "WHERE OrderID = ?";
         jdbcTemplate.update(sql, 
-            product.getNome(), 
-            product.getPrezzo(), 
-            product.getDescrizione(), 
-            product.getImmagine(), 
-            product.getAmountAvailable(), 
-            product.getCategoria(), 
-            product.getDataDiInserimento(), 
-            product.getProductId());
+            order.getUsersID(), 
+            order.getStatoDiSpedizione(), 
+            order.getDataDiConsegna(), 
+            order.getDataDiRichiesta(), 
+            order.isAccettazioneOrdine(), 
+            order.isStatus(), 
+            order.getCorriere(), 
+            order.getPosizione(), 
+            order.getOrderID());
     }
 
-    //Delete
-    public void deleteProduct(int productId) {
-        String sql = "DELETE FROM products WHERE productId = ?";
-        jdbcTemplate.update(sql, productId);
+    // Delete
+    public void deleteOrder(int orderID) {
+        String sql = "DELETE FROM Orders WHERE OrderID = ?";
+        jdbcTemplate.update(sql, orderID);
     }
+
     @Override
-    public List<Products> query(ParmQueryProducts parmQuery) {
+    public List<Orders> query(ParmQueryOrders parmQuery) {
+        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'query'");
     }
-    
 }
-
-

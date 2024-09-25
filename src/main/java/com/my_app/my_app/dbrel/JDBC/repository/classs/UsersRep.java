@@ -1,11 +1,16 @@
 package com.my_app.my_app.dbrel.JDBC.repository.classs;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.my_app.my_app.dbrel.JDBC.model.Users;
+import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.parametri.ParmQueryUsers;
 import com.my_app.my_app.dbrel.JDBC.repository.interfacee.UsersRepI;
 
@@ -15,72 +20,82 @@ public class UsersRep implements UsersRepI {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     // Query
-    public List<Users> query(ParmQueryUsers parmQuery) {
+    public List<Users> query(ParamQuery paramQuery) {
         StringBuilder sql = new StringBuilder("SELECT ");
 
-        if (parmQuery.isDistinct()) {
+        if (paramQuery.isDistinct()) {
             sql.append("DISTINCT ");
         }
 
-        if (parmQuery.isAll()) {
+        if (paramQuery.isAll()) {
             sql.append("ALL ");
         }
 
         sql.append("* FROM Users ");
 
-        if (parmQuery.getCondizioneWhere().isPresent()) {
-            sql.append("WHERE ").append(parmQuery.getCondizioneWhere().get()).append(" ");
-        }
-        if (parmQuery.getValoriWhere().isPresent()) {
-            sql.append(parmQuery.getValoriWhere().get()).append(" ");
-        }
-        if (parmQuery.getBoleani().isPresent()) {
-            sql.append(parmQuery.getBoleani().get()).append(" ");
+        // Condizione WHERE
+        if (paramQuery.getCondizioneWhere().isPresent()) {
+            sql.append("WHERE ").append(paramQuery.getCondizioneWhere().get()).append(" ");
         }
 
-        if (parmQuery.isOrderBy()) {
-            sql.append("ORDER BY ").append(parmQuery.isOrderBy() ? "DESC " : "ASC ");
+        if (paramQuery.getValoriWhere().isPresent()) {
+            sql.append(paramQuery.getValoriWhere().get()).append(" ");
         }
 
-        if (parmQuery.getTop() != null) {
-            sql.insert(6, "TOP " + parmQuery.getTop() + " ");
+        if (paramQuery.getBoleani().isPresent()) {
+            sql.append(paramQuery.getBoleani().get()).append(" ");
         }
 
-        if (parmQuery.isMin()) {
+        // Ordinamento
+        if (paramQuery.isOrderBy()) {
+            sql.append("ORDER BY ").append(paramQuery.isOrderBy() ? "DESC " : "ASC ");
+        }
+
+        // TOP, MIN, MAX, COUNT, AVG, SUM
+        if (paramQuery.getTop() != null) {
+            sql.insert(6, "TOP " + paramQuery.getTop() + " ");
+        }
+
+        if (paramQuery.isMin()) {
             sql.insert(6, "MIN ");
         }
-        if (parmQuery.isMax()) {
+        if (paramQuery.isMax()) {
             sql.insert(6, "MAX ");
         }
-        if (parmQuery.isCount()) {
+        if (paramQuery.isCount()) {
             sql.insert(6, "COUNT ");
         }
-        if (parmQuery.isAvg()) {
+        if (paramQuery.isAvg()) {
             sql.insert(6, "AVG ");
         }
-        if (parmQuery.isSum()) {
+        if (paramQuery.isSum()) {
             sql.insert(6, "SUM ");
         }
 
-        if (parmQuery.getLike().isPresent() && parmQuery.getCondizioneWhere().isPresent()) {
-            sql.append("LIKE ").append(parmQuery.getLike().get()).append(" ");
-        }
+        // Esecuzione della query
+        Map<String, Object> params = new HashMap<>();
+        // Aggiungi qui la logica per popolare 'params' se necessario
 
-        return jdbcTemplate.query(sql.toString(), (rs, rowNum) -> new Users(
-            rs.getInt("UsersID"),
-            rs.getString("Nome"),
-            rs.getString("Cognome"),
-            rs.getString("Ruolo"),
-            rs.getString("NomeUtente"),
-            rs.getString("Email"),
-            rs.getString("Password"),
-            rs.getString("Immagine"),
-            rs.getInt("Category")
-        ));
+        return namedParameterJdbcTemplate.query(sql.toString(), params, (rs, rowNum) -> {
+            Users user = new Users();
+            user.setUsersID(rs.getInt("UsersID"));
+            user.setNome(rs.getString("Nome"));
+            user.setCognome(rs.getString("Cognome"));
+            user.setRuolo(rs.getString("Ruolo"));
+            user.setNomeUtente(rs.getString("NomeUtente"));
+            user.setEmail(rs.getString("Email"));
+            user.setPassword(rs.getString("Password"));
+            user.setImmagine(rs.getString("Immagine"));
+            user.setCategory(rs.getInt("Category"));
+            return user;
+        });
     }
 
-    // Per implementare il faker
+    // Save All
     public void saveAll(List<Users> users) {
         String sql = "INSERT INTO Users (Nome, Cognome, Ruolo, NomeUtente, Email, Password, Immagine, Category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
@@ -100,9 +115,10 @@ public class UsersRep implements UsersRepI {
 
     // Insert
     public void insertUser(Users user) {
-        String sql = "INSERT INTO Users (Nome, Cognome, Ruolo, NomeUtente, Email, Password, Immagine, Category) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Users (usersID, Nome, Cognome, Ruolo, NomeUtente, Email, Password, Immagine, Category) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, 
+            user.getUsersID(), 
             user.getNome(), 
             user.getCognome(), 
             user.getRuolo(), 
@@ -116,7 +132,7 @@ public class UsersRep implements UsersRepI {
     // Update
     public void updateUser(Users user) {
         String sql = "UPDATE Users SET Nome = ?, Cognome = ?, Ruolo = ?, NomeUtente = ?, Email = ?, Password = ?, Immagine = ?, Category = ? " +
-                     "WHERE UsersID = ?";
+                     "WHERE usersID = ?";
         jdbcTemplate.update(sql, 
             user.getNome(), 
             user.getCognome(), 
@@ -130,8 +146,16 @@ public class UsersRep implements UsersRepI {
     }
 
     // Delete
-    public void deleteUser(int userId) {
-        String sql = "DELETE FROM Users WHERE UsersID = ?";
-        jdbcTemplate.update(sql, userId);
+    public void deleteUser(int usersID) {
+        String sql = "DELETE FROM Users WHERE usersID = ?";
+        jdbcTemplate.update(sql, usersID);
+    }
+
+   
+
+    @Override
+    public List<Users> query(ParmQueryUsers parmQuery) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'query'");
     }
 }

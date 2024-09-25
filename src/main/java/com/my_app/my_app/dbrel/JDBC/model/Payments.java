@@ -10,12 +10,8 @@ public class Payments {
     private double total;     // totale del pagamento
 
     // Costruttore
-    public Payments(int paymentsID, String type, LocalDate data, boolean status, double total) {
-        this.paymentsID = paymentsID;
-        this.type = type;
-        this.data = data;
-        this.status = status;
-        this.total = total;
+    public Payments() {
+        
     }
 
     // Getters e Setters
