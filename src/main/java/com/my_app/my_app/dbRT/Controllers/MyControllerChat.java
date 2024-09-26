@@ -6,6 +6,7 @@ import com.my_app.my_app.dbRT.Services.ChatSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,13 +14,14 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/rt/chats")
+@PreAuthorize("hasRole('USER')")
 public class MyControllerChat {
 
     @Autowired
     private ChatSer chatSer;
 
     // Endpoint per eseguire una query dinamica sulle chat
-    @PostMapping("/query")
+    @GetMapping("/query")
     public CompletableFuture<ResponseEntity<List<Chat>>> queryChats(@RequestBody ParamQueryChat paramQueryChat) {
         return chatSer.queryChats(paramQueryChat)
             .thenApply(notificheList -> new ResponseEntity<>(notificheList, HttpStatus.OK))

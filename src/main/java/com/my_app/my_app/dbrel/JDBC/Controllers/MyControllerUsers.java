@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JDBC.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.JDBC.model.Users;
@@ -33,6 +34,7 @@ public class MyControllerUsers {
     }
 
     @GetMapping("jdbc/queryUsers")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public List<Users> query() {
         List<Users> results = usersSer.queryService(parmQuery);
@@ -49,6 +51,7 @@ public class MyControllerUsers {
 
     // Update
     @PutMapping("jdbc/updateUsers/{userId}")
+    @PreAuthorize("hasRole('USER')")
     @ResponseBody
     public String updateUser(@PathVariable int userId, @RequestBody Users user) {
         user.setUsersID(userId);  
@@ -58,6 +61,7 @@ public class MyControllerUsers {
 
     // Delete
     @DeleteMapping("jdbc/deleteUsers/{userId}")
+    @PreAuthorize("hasRole('USER', 'ADMIN')")
     @ResponseBody
     public String deleteUser(@PathVariable int userId) {
         usersSer.deleteUserService(userId);

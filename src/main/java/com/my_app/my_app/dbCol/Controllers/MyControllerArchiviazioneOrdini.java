@@ -3,6 +3,7 @@ package com.my_app.my_app.dbCol.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbCol.Models.ArchiviazioneOrdini;
@@ -11,6 +12,8 @@ import com.my_app.my_app.dbCol.Services.ArhciviazioneOrdiniSer;
 
 @RestController
 @RequestMapping("api/col/ordini")
+@PreAuthorize("hasRole('DELIVERY')")
+
 public class MyControllerArchiviazioneOrdini {
 
     @Autowired

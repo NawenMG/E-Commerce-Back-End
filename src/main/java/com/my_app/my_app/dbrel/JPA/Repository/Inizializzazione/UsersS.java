@@ -8,4 +8,6 @@ import com.my_app.my_app.dbrel.JPA.Repository.Interfaceeee.UsersRepI;
 
 @Repository
 public interface UsersS extends JpaRepository<Users, Integer>, UsersRepI {
+    Users findByUsername(String NomeUtente);
+
 }

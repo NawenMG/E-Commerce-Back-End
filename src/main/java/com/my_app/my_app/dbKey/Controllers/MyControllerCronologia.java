@@ -6,12 +6,14 @@ import com.my_app.my_app.dbKey.Parametri.ParamQuery;
 import com.my_app.my_app.dbKey.Services.CronologiaSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/key/cronologia")
+@PreAuthorize("hasRole('USER')")
 public class MyControllerCronologia {
     
     @Autowired

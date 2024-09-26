@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JDBC.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.JDBC.model.Payments;
@@ -34,6 +35,7 @@ public class MyControllerPayments {
 
     // Insert
     @PostMapping("jdbc/insert")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String createPayment(@RequestBody Payments payment) {
         paymentsSer.insertPaymentService(payment);
@@ -42,6 +44,7 @@ public class MyControllerPayments {
 
     // Update
     @PutMapping("jdbc/update/{paymentsId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String updatePayment(@PathVariable int paymentsId, @RequestBody Payments payment) {
         payment.setPaymentsID(paymentsId);  
@@ -51,6 +54,7 @@ public class MyControllerPayments {
 
     // Delete
     @DeleteMapping("jdbc/delete/{paymentsId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String deletePayment(@PathVariable int paymentsId) {
         paymentsSer.deletePaymentService(paymentsId);
@@ -59,6 +63,7 @@ public class MyControllerPayments {
 
     // Faker per generare dati
     @PostMapping("jdbc/faker/{numberOfPayments}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String generatePayments(@PathVariable int numberOfPayments) {
         paymentsSer.saveAllService(numberOfPayments);

@@ -6,6 +6,7 @@ import com.my_app.my_app.dbRT.Services.SistemaSpedizioneSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/rt/spedizioni")
+@PreAuthorize("hasRole('DELIVERY')")
 public class MyControllerSistemaSpedizione {
 
     @Autowired

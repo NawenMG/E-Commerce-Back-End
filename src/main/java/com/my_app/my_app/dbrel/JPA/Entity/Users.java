@@ -1,6 +1,14 @@
 package com.my_app.my_app.dbrel.JPA.Entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.my_app.my_app.security.sessioniwithJWT.UsersRole.Role;
+
+
+
+
 
 @Entity
 @Table(name = "Users")
@@ -12,7 +20,11 @@ public class Users {
 
     private String Nome;
     private String Cognome;
-    private String Ruolo;
+
+    @ElementCollection(targetClass = Role.class)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> Ruolo = new HashSet<>(); // Usare un Set per gestire i ruoli
+
     private String NomeUtente;
     private String Email;
     private String Password;
@@ -21,18 +33,6 @@ public class Users {
 
     // Costruttore di default
     public Users() {}
-
-    // Costruttore con parametri
-    public Users(String nome, String cognome, String ruolo, String nomeUtente, String email, String password, String immagine, int category) {
-        Nome = nome;
-        Cognome = cognome;
-        Ruolo = ruolo;
-        NomeUtente = nomeUtente;
-        Email = email;
-        Password = password;
-        Immagine = immagine;
-        Category = category;
-    }
 
     // Getters e setters
     public int getUsersID() {
@@ -59,11 +59,11 @@ public class Users {
         Cognome = cognome;
     }
 
-    public String getRuolo() {
+    public Set<Role> getRuolo() {
         return Ruolo;
     }
 
-    public void setRuolo(String ruolo) {
+    public void setRuolo(Set<Role> ruolo) {
         Ruolo = ruolo;
     }
 

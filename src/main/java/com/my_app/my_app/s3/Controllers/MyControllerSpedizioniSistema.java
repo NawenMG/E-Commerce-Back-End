@@ -14,36 +14,35 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.SdkClientException;
-import com.my_app.my_app.dbKey.Models.Carrello;
+import com.my_app.my_app.dbRT.Collections.PerChat.Messaggio;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/carrello")
+@RequestMapping("s3/dbRel/chat/spedizioni")
 @PreAuthorize("hasRole('USER')")
-public class MyControllerdbKeyCarrello {
+public class MyControllerSpedizioniSistema {
     
      @Autowired
     private s3Ser s3Service;
     
     // Per inserire l'immagine in s3
-    @PostMapping("/insert")
+    @PostMapping("/insert/immagine")
     public ResponseEntity<String> insertImmagine(@RequestParam MultipartFile imageFile) throws AmazonServiceException, SdkClientException, IOException {
         
-        Carrello carrello = new Carrello(); 
-
+        Messaggio messaggio = new Messaggio(); 
         // Carica l'immagine su S3 e ottieni l'URL
         String imageUrl = s3Service.uploadMedia(imageFile);
-        carrello.setProductImage(imageUrl);
+        messaggio.setImmagine(imageUrl);
 
         // Salva il prodotto nel database (usa un repository qui)
         return ResponseEntity.ok("Prodotto creato con successo");
     }
 
      // Endpoint per ottenere i dettagli del prodotto, inclusi i media
-    @GetMapping("/query")
+    @GetMapping("/query/immagine")
     public String getImmagine() {
-        Carrello carrello = new Carrello();
-        String immagine = carrello.getProductImage();
+        Messaggio messaggio = new Messaggio();
+        String immagine = messaggio.getImmagine();
         return s3Service.getMediaUrl(immagine);
     }
 }

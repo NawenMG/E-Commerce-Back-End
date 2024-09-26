@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JDBC.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.JDBC.model.Orders;
@@ -27,6 +28,7 @@ public class MyControllerOrders {
 
     // Query
     @PostMapping("jdbc/query")
+    @PreAuthorize("hasRole('USER')")
     @ResponseBody
     public List<Orders> query(@RequestBody ParmQueryOrders parmQuery) {
         return ordersSer.queryService(parmQuery);
@@ -34,6 +36,7 @@ public class MyControllerOrders {
 
     // Insert
     @PostMapping("jdbc/insert")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String createOrder(@RequestBody Orders order) {
         ordersSer.insertOrderService(order);
@@ -42,6 +45,7 @@ public class MyControllerOrders {
 
     // Update
     @PutMapping("jdbc/update/{orderId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String updateOrder(@PathVariable int orderId, @RequestBody Orders order) {
         order.setOrderID(orderId);
@@ -51,6 +55,7 @@ public class MyControllerOrders {
 
     // Delete
     @DeleteMapping("jdbc/delete/{orderId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String deleteOrder(@PathVariable int orderId) {
         ordersSer.deleteOrderService(orderId);
@@ -59,6 +64,7 @@ public class MyControllerOrders {
 
     // Faker per generare dati
     @PostMapping("jdbc/faker/{numberOfOrders}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String generateOrders(@PathVariable int numberOfOrders) {
         ordersSer.saveAllService(numberOfOrders);

@@ -1,0 +1,19 @@
+JWT
+Struttura JWT:
+- Intestazione: specifica il tipo di token (JWT) e l'algoritmo di firma (ad esempio, HMAC SHA256).
+- Payload: contiene le affermazioni, ovvero affermazioni su un'entità (utente) e metadati aggiuntivi.
+- Firma: creata codificando l'intestazione e il payload con un segreto, garantendo l'integrità del token.
+JWT in azione:
+- Dopo l'autenticazione dell'utente, il server genera un JWT.
+- Questo JWT viene rispedito al client e memorizzato, spesso nella memoria locale o in un cookie HTTP-only.
+- Il client include questo token nell'intestazione di autorizzazione HTTP per le richieste successive.
+- Il server convalida il token e concede l'accesso se valido.
+
+
+
+SESSIONI
+Come funziona:
+- Autenticazione utente : l'utente fornisce le credenziali, che il server verifica.
+- Creazione della sessione : in caso di autenticazione riuscita, il server crea un record di sessione con un identificatore univoco, un identificatore utente, un orario di inizio sessione, una scadenza e, possibilmente, un contesto aggiuntivo come indirizzo IP e User Agent. Lo memorizza nel database.
+- Archiviazione dei cookie : questo identificativo di sessione viene inviato e archiviato come cookie nel browser dell'utente.
+- Validazione della sessione : ogni richiesta dal browser dell'utente include questo cookie, quindi il server convalida la sessione interrogando il database. Se valida, la richiesta viene elaborata.

@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JDBC.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.JDBC.model.Products;
@@ -38,6 +39,7 @@ public class MyControllerProducts {
     }
     //Insert
     @PostMapping("jdbc/insertProducts")
+    @PreAuthorize("hasRole('SELLER')")
     @ResponseBody
     public String createProduct(@RequestBody Products product) {
         productsSer.insertProductService(product);
@@ -45,6 +47,7 @@ public class MyControllerProducts {
     }
     //Update
     @PutMapping("jdbc/updateProducts/{productId}")
+    @PreAuthorize("hasRole('SELLER')")
     @ResponseBody
     public String updateProduct(@PathVariable int productId, @RequestBody Products product) {
         product.setProductId(productId);  
@@ -53,6 +56,7 @@ public class MyControllerProducts {
     }
     //Delete
     @DeleteMapping("jdbc/deleteProducts/{productId}")
+    @PreAuthorize("hasRole('SELLER')")
     @ResponseBody
     public String deleteProduct(@PathVariable int productId) {
         productsSer.deleteProductService(productId);
@@ -60,6 +64,7 @@ public class MyControllerProducts {
     }
     //Faker per inserire dei dati
     @PostMapping("jdbc/fakerProducts/{numberOfProducts}")
+    @PreAuthorize("hasRole('SELLER')")
     @ResponseBody
     public String generateProducts(@PathVariable int numberOfProducts) { //Pathvariable quando immetti un parametro dall'url
         productsSer.saveAllService(numberOfProducts);

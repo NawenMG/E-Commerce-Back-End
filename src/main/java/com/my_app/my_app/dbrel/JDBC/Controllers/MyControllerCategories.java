@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JDBC.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbrel.JDBC.model.Categories;
@@ -34,6 +35,7 @@ public class MyControllerCategories {
 
     // Insert
     @PostMapping("jdbc/insert")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String createCategory(@RequestBody Categories category) {
         categoriesSer.insertCategoryService(category);
@@ -42,6 +44,7 @@ public class MyControllerCategories {
 
     // Update
     @PutMapping("jdbc/update/{categoriesId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String updateCategory(@PathVariable int categoriesId, @RequestBody Categories category) {
         category.setCategoriesID(categoriesId);
@@ -51,6 +54,7 @@ public class MyControllerCategories {
 
     // Delete
     @DeleteMapping("jdbc/delete/{categoriesId}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String deleteCategory(@PathVariable int categoriesId) {
         categoriesSer.deleteCategoryService(categoriesId);
@@ -59,6 +63,7 @@ public class MyControllerCategories {
 
     // Faker per inserire dati
     @PostMapping("jdbc/faker/{numberOfCategories}")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     public String generateCategories(@PathVariable int numberOfCategories) {
         // Implementa la logica per generare e salvare categorie fittizie

@@ -1,6 +1,7 @@
 package com.my_app.my_app.dbDoc.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.my_app.my_app.dbDoc.Collections.SchedaProdotto;
@@ -21,16 +22,19 @@ public class MyControllerSchedaProdotto {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('SELLER')")
     public void create(@RequestBody SchedaProdotto schedaProdotto) {
         schedaProdottoSer.insert(schedaProdotto); 
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasRole('SELLER')")
     public void update(@RequestBody SchedaProdotto schedaProdotto) {
         schedaProdottoSer.update(schedaProdotto); 
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('SELLER')")
     public void delete(@PathVariable int id) {
         schedaProdottoSer.delete(id); 
     }

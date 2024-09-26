@@ -6,6 +6,7 @@ import com.my_app.my_app.dbrel.JPA.Servicee.CategoriesSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class MyControllerCategories {
     private CategoriesSer categoriesSer;
 
     // Endpoint per ottenere le categorie
-    @PostMapping("jpa/query")
+    @GetMapping("jpa/query")
     public ResponseEntity<List<Categories>> query(@RequestBody ParamQueryJpa paramQuery) {
         List<Categories> categories = categoriesSer.query(paramQuery);
         return new ResponseEntity<>(categories, HttpStatus.OK);
@@ -26,6 +27,7 @@ public class MyControllerCategories {
 
     // Endpoint per inserire una nuova categoria
     @PostMapping("jpa/insert")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> insert(@RequestBody Categories categories) {
         categoriesSer.insert(categories);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -33,6 +35,7 @@ public class MyControllerCategories {
 
     // Endpoint per aggiornare una categoria esistente
     @PutMapping("jpa/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> update(@RequestBody Categories categories) {
         categoriesSer.update(categories);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -40,6 +43,7 @@ public class MyControllerCategories {
 
     // Endpoint per eliminare una categoria per ID
     @DeleteMapping("jpa/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriesSer.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
