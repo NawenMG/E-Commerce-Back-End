@@ -6,6 +6,8 @@ import com.my_app.my_app.dbKey.Parametri.ParamQuery;
 import com.my_app.my_app.dbKey.Repository.Classss.CronologiaRep;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,19 +19,22 @@ public class CronologiaSer {
     private CronologiaRep cronologiaRep;
 
     
-
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<Cronologia> search(ParamQuery paramQuery) {
         return cronologiaRep.search(paramQuery);
     }
 
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void saveOrUpdate(Carrello carrello) {
         cronologiaRep.saveOrUpdate(carrello);
     }
 
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public Carrello findById(int userID, int productID) {
         return cronologiaRep.findById(userID, productID);
     }
 
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteById(int userID, int productID) {
         cronologiaRep.deleteById(userID, productID);
     }

@@ -4,6 +4,8 @@ import com.my_app.my_app.dbG.Parametri.ParamQuery;
 import com.my_app.my_app.dbG.Models.SistemaDiRaccomandazione.NodeProduct;
 import com.my_app.my_app.dbG.Repository.Classsss.ProductRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,22 +16,22 @@ public class ProductSer {
     @Autowired
     private ProductRep productRep;
 
-    // Ricerca dinamica dei prodotti
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<NodeProduct> findByDynamicQuery(ParamQuery paramQuery) {
         return productRep.findByDynamicQuery(paramQuery);
     }
 
-    // Inserimento di un nuovo nodo prodotto
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insertNodeProduct(NodeProduct product) {
         productRep.insertNodeProduct(product);
     }
 
-    // Aggiornamento di un nodo prodotto esistente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void updateNodeProduct(NodeProduct product) {
         productRep.updateNodeProduct(product);
     }
 
-    // Eliminazione di un nodo prodotto
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteNodeProduct(String productId) {
         productRep.deleteNodeProduct(productId);
     }

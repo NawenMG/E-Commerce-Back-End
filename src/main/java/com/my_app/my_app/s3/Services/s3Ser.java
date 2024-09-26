@@ -7,6 +7,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,12 +22,14 @@ public class s3Ser {
 
     private String bucketName = "your-s3-bucket-name";
 
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public String uploadMedia(MultipartFile file) throws AmazonServiceException, SdkClientException, IOException {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename(); //Prende il nome del file
         amazonS3.putObject(bucketName, fileName, file.getInputStream(), null);
         return amazonS3.getUrl(bucketName, fileName).toString(); // Restituisce l'URL pubblico
     }
 
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public String getMediaUrl(String fileName) {
         return amazonS3.getUrl(bucketName, fileName).toString(); // Restituisce l'URL per il file specificato
     }

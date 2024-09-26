@@ -1,6 +1,8 @@
 package com.my_app.my_app.dbrel.JDBC.servicee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,27 +17,27 @@ public class ReturnsSer {
     @Autowired
     private ReturnsRepI returnsRepI;
 
-    // Query
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<Returns> queryService(ParmQueryReturns parmQuery) {
         return returnsRepI.query(parmQuery);
     }
 
-    // Servizio per il faker
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
      public void saveAllService(int number) {
         returnsRepI.saveAll(number);
     }
 
-    // Inserisci un nuovo reso
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insertReturnService(Returns returns) {
         returnsRepI.insertReturn(returns);
     }
 
-    // Aggiorna un reso esistente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void updateReturnService(Returns returns) {
         returnsRepI.updateReturn(returns);
     }
 
-    // Elimina un reso
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteReturnService(int returnsID) {
         returnsRepI.deleteReturn(returnsID);
     }

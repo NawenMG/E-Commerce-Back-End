@@ -4,6 +4,8 @@ import com.my_app.my_app.dbG.Parametri.ParamQuery;
 import com.my_app.my_app.dbG.Models.SistemaDiRaccomandazione.NodeUserLocation;
 import com.my_app.my_app.dbG.Repository.Classsss.UserLocationRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,22 +16,22 @@ public class UserLocationSer {
     @Autowired
     private UserLocationRep userLocationRep;
 
-    // Ricerca dinamica delle localizzazioni utente
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<NodeUserLocation> findByDynamicQuery(ParamQuery paramQuery) {
         return userLocationRep.findByDynamicQuery(paramQuery);
     }
 
-    // Inserimento di una nuova localizzazione utente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insertNodeUserLocation(NodeUserLocation location) {
         userLocationRep.insertNodeUserLocation(location);
     }
 
-    // Aggiornamento di una localizzazione utente esistente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void updateNodeUserLocation(NodeUserLocation location) {
         userLocationRep.updateNodeUserLocation(location);
     }
 
-    // Eliminazione di una localizzazione utente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteNodeUserLocation(String locationId) {
         userLocationRep.deleteNodeUserLocation(locationId);
     }

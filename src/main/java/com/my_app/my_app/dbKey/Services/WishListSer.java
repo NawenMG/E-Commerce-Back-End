@@ -6,6 +6,8 @@ import com.my_app.my_app.dbKey.Parametri.ParamQuery;
 import com.my_app.my_app.dbKey.Repository.Classss.WishListRep;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,19 +18,22 @@ public class WishListSer {
     @Autowired
     private WishListRep wishListRep;
 
-
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<WishList> search(ParamQuery paramQuery) {
         return wishListRep.search(paramQuery);
     }
 
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void saveOrUpdate(Carrello carrello) {
         wishListRep.saveOrUpdate(carrello);
     }
 
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public Carrello findById(int userID, int productID) {
         return wishListRep.findById(userID, productID);
     }
 
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteById(int userID, int productID) {
         wishListRep.deleteById(userID, productID);
     }

@@ -1,6 +1,8 @@
 package com.my_app.my_app.dbrel.JDBC.servicee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,27 +17,27 @@ public class CategoriesSer {
     @Autowired
     private CategoriesRepI categoriesRepI;
 
-    // Query
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<Categories> queryService(ParmQueryCategories parmQuery) {
         return categoriesRepI.query(parmQuery);
     }
 
-    // Servizio per salvare tutte le categorie
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void saveAllService(int number) {
         categoriesRepI.saveAll(number);
     }
 
-    // Insert
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insertCategoryService(Categories category) {
         categoriesRepI.insertCategory(category);
     }
 
-    // Update
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void updateCategoryService(Categories category) {
         categoriesRepI.updateCategory(category);
     }
 
-    // Delete
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteCategoryService(int categoriesId) {
         categoriesRepI.deleteCategory(categoriesId);
     }

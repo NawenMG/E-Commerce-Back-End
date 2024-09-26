@@ -4,6 +4,8 @@ import com.my_app.my_app.dbrel.JPA.Entity.Payments;
 import com.my_app.my_app.dbrel.JPA.Parametri.ParamQueryJpa;
 import com.my_app.my_app.dbrel.JPA.Repository.Classss.PaymentsRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,22 +16,22 @@ public class PaymentsSer {
     @Autowired
     private PaymentsRep paymentsRep;
 
-    // Query per ottenere i pagamenti in base ai parametri
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<Payments> query(ParamQueryJpa paramQuery) {
         return paymentsRep.query(paramQuery);
     }
 
-    // Inserire un nuovo pagamento
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insert(Payments payment) {
         paymentsRep.insert(payment);
     }
 
-    // Aggiornare un pagamento esistente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void update(Payments payment) {
         paymentsRep.update(payment);
     }
 
-    // Eliminare un pagamento per ID
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void delete(Integer id) {
         paymentsRep.delete(id);
     }

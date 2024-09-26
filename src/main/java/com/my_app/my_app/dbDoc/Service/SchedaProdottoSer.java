@@ -1,6 +1,8 @@
 package com.my_app.my_app.dbDoc.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.my_app.my_app.dbDoc.Collections.SchedaProdotto;
@@ -14,22 +16,22 @@ public class SchedaProdottoSer {
     @Autowired
     private SchedaProdottoRep schedaProdottoRep; // Inietta il repository
 
-    // Metodo per eseguire la query
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<SchedaProdotto> query(SchedaProdotto schedaProdotto) {
         return schedaProdottoRep.query(schedaProdotto);
     }
 
-    // Metodo per inserire una nuova scheda prodotto
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insert(SchedaProdotto schedaProdotto) {
         schedaProdottoRep.CustomInsert(schedaProdotto);
     }
 
-    // Metodo per aggiornare una scheda prodotto esistente
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void update(SchedaProdotto schedaProdotto) {
         schedaProdottoRep.update(schedaProdotto);
     }
 
-    // Metodo per eliminare una scheda prodotto per ID
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void delete(int idSchedaProdotto) {
         schedaProdottoRep.delete(idSchedaProdotto);
     }

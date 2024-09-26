@@ -1,6 +1,8 @@
 package com.my_app.my_app.dbrel.JDBC.servicee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,27 +17,27 @@ public class OrdersSer {
     @Autowired
     private OrdersRepI ordersRepI;
 
-    // Query
+    @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")
     public List<Orders> queryService(ParmQueryOrders parmQuery) {
         return ordersRepI.query(parmQuery);
     }
 
-    // Servizio per il faker
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
      public void saveAllService(int number) {
         ordersRepI.saveAll(number);
     }
 
-    // Inserimento di un ordine
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void insertOrderService(Orders order) {
         ordersRepI.insertOrder(order);
     }
 
-    // Aggiornamento di un ordine
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void updateOrderService(Orders order) {
         ordersRepI.updateOrder(order);
     }
 
-    // Eliminazione di un ordine
+    @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
     public void deleteOrderService(int orderId) {
         ordersRepI.deleteOrder(orderId);
     }
