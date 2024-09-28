@@ -4,24 +4,31 @@ import org.influxdb.annotation.Column;
 import org.influxdb.annotation.Measurement;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Measurement(name = "AnalysisUser")
 public class AnalysisUser {
     // TAG
     @Column(name = "User")
+    @NotBlank(message = "Obbligatorio")
     private String user;
 
     @Column(name = "TypeDevice")
+    @NotBlank(message = "Obbligatorio")
     private String typeDevice;
 
     @Column(name = "Action")
+    @NotBlank(message = "Obbligatorio")
     private String action;
 
     // Field
     @Column(name = "DuringAction")
+    @NotBlank(message = "Obbligatorio")
     private Long duringAction; 
 
     // Timestamp
     @Column(name = "TimeStamp")
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime timestamp; //ZonedDateTime per gestire i fusi orari
 
     public AnalysisUser() {

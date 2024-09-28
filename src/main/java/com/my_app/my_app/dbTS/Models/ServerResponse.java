@@ -4,27 +4,35 @@ import org.influxdb.annotation.Column;
 import org.influxdb.annotation.Measurement;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Measurement(name = "ServerResponse")
 public class ServerResponse {
     // Tag
     @Column(name = "Server")
+    @NotBlank(message = "Obbligatorio")
     private String server; 
 
     @Column(name = "Endpoint")
+    @NotBlank(message = "Obbligatorio")
     private String endpoint; 
 
     // Field
     @Column(name = "ResponseTimeAverage")
+    @NotBlank(message = "Obbligatorio")
     private double responseTimeAverage; 
 
     @Column(name = "RequestNumbers")
+    @NotBlank(message = "Obbligatorio")
     private int requestNumbers; 
 
     @Column(name = "ErrorsNumbers")
+    @NotBlank(message = "Obbligatorio")
     private int errorsNumbers; 
 
     // Timestamp
     @Column(name = "TimeStamp")
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime timeStamp; 
 
     public ServerResponse() {

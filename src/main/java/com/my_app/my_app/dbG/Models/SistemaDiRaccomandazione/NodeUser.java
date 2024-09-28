@@ -4,15 +4,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Node
 public class NodeUser {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private String userId;
+
+    @NotBlank(message = "Obbligatorio")
     private String name;
+
+    @NotBlank(message = "Obbligatorio")
+    @Email(message = "L'email non è valida")
     private String email;
+
+    @NotBlank(message = "Obbligatorio")
     private String location;
 
     // Relazione con i prodotti acquistati, purchased: un utente acquista il prodotto

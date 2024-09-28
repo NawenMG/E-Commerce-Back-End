@@ -3,15 +3,34 @@ package com.my_app.my_app.dbrel.JDBC.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Orders {
+    @NotBlank(message = "Obbligatorio")
     private int orderID;                // Chiave primaria
+
+    @NotBlank(message = "Obbligatorio")
     private int usersID;                // Riferimento all'ID dell'utente
+
+    @NotBlank(message = "Obbligatorio")
     private LocalTime statoDiSpedizione; // Stato di spedizione
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate dataDiConsegna;   // Data di consegna
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate dataDiRichiesta;   // Data di richiesta
+
+    @NotBlank(message = "Obbligatorio")
     private boolean accettazioneOrdine; // Accettazione ordine
+
+    @NotBlank(message = "Obbligatorio")
     private boolean status;              // Stato dell'ordine
+
+    @NotBlank(message = "Obbligatorio")
     private String corriere;             // Nome del corriere
+
+    @NotBlank(message = "Obbligatorio")
     private String posizione;            // Posizione dell'ordine
 
     // Costruttore

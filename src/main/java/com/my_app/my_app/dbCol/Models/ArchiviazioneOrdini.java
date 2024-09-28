@@ -4,19 +4,39 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
 import java.util.List;
 
 @Table("ArchiviazioneOrdini")
 public class ArchiviazioneOrdini {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private int id;
+
+    @NotBlank(message = "Obbligatorio")
     private int userID;
+
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime orderDate;
+
+    @NotBlank(message = "Obbligatorio")
     private String status;
+
+    @NotBlank(message = "Obbligatorio")
     private double totalImport;
+    
+    @NotBlank(message = "Obbligatorio")
     private String indirizzo;
+
+    @NotEmpty(message = "La lista non può essere vuota")
     private List<String> articoliOrdine;
+
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime dataConsegna;
+
+    @NotBlank(message = "Obbligatorio")
     private String corriere;
 
     public ArchiviazioneOrdini() {

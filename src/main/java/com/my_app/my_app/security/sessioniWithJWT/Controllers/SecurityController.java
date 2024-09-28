@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioniwithJWT.Controllers;
+package com.my_app.my_app.security.sessioniWithJWT.Controllers;
 
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.my_app.my_app.dbrel.JPA.Entity.Users;
 import com.my_app.my_app.dbrel.JPA.Repository.Inizializzazione.UsersS;
-import com.my_app.my_app.security.sessioniwithJWT.JWT.JwtUtil;
+import com.my_app.my_app.security.sessioniWithJWT.JWT.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

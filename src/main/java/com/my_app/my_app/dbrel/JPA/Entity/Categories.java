@@ -1,6 +1,7 @@
 package com.my_app.my_app.dbrel.JPA.Entity;
 
-import jakarta.persistence.*;;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;;
 
 @Entity
 @Table(name = "Categories")
@@ -8,8 +9,11 @@ public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotBlank(message = "Obbligatorio")
     private int CategoriesID;
 
+
+    @NotBlank(message = "Obbligatorio")
     private String Name;
 
     // Costruttore di default

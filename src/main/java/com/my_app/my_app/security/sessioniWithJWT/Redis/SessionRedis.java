@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioniwithJWT.Redis;
+package com.my_app.my_app.security.sessioniWithJWT.Redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

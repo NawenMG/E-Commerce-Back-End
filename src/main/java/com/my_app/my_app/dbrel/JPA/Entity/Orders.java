@@ -3,6 +3,7 @@ package com.my_app.my_app.dbrel.JPA.Entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Orders")
@@ -10,18 +11,26 @@ public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotBlank(message = "Obbligatorio")
     private int OrderID;
 
     @ManyToOne
     @JoinColumn(name = "UserID", nullable = false)
+    @NotBlank(message = "Obbligatorio")
     private Users user;
 
     @ManyToOne
     @JoinColumn(name = "ProductID", nullable = false)
+    @NotBlank(message = "Obbligatorio")
     private Products product;
 
+    @NotBlank(message = "Obbligatorio")
     private int Quantity;
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate OrderDate;
+
+    @NotBlank(message = "Obbligatorio")
     private String Status;
 
     // Costruttore di default

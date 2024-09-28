@@ -5,14 +5,27 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import jakarta.validation.constraints.NotBlank;
+
 @DynamoDBTable(tableName = "WishList")
 public class WishList {
+    @NotBlank(message = "Obbligatorio")
     private int userID;         // Partition Key
+
+    @NotBlank(message = "Obbligatorio")
     private int productID;      // Sort Key
+
+    @NotBlank(message = "Obbligatorio")
     private String productName;
+
+    @NotBlank(message = "Obbligatorio")
     private double productPrice;
+
     private String productImage;
+
     private String productText;
+
+    @NotBlank(message = "Obbligatorio")
     private String productCompany;
 
     public WishList() {

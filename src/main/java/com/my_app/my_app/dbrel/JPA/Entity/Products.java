@@ -1,6 +1,7 @@
 package com.my_app.my_app.dbrel.JPA.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
@@ -10,14 +11,28 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotBlank(message = "Obbligatorio")
     private int productId;
 
+    @NotBlank(message = "Obbligatorio")
     private String nome;
+
+    @NotBlank(message = "Obbligatorio")
     private double prezzo;
+
+    @NotBlank(message = "Obbligatorio")
     private String descrizione;
+
+    @NotBlank(message = "Obbligatorio")
     private String immagine;
+
+    @NotBlank(message = "Obbligatorio")
     private int amountAvailable;
+
+    @NotBlank(message = "Obbligatorio")
     private String categoria;
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate dataDiInserimento;
 
     // Costruttore di default

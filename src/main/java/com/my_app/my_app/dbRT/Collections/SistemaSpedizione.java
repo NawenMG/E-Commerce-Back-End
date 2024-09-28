@@ -3,7 +3,10 @@ package com.my_app.my_app.dbRT.Collections;
 import java.util.List;
 import org.threeten.bp.LocalDate;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class SistemaSpedizione {
+    @NotEmpty(message = "La lista non può essere vuota")
     private List<Spedizione> spedizioni;  
 
     public SistemaSpedizione() {

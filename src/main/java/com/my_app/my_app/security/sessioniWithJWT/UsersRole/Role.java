@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioniwithJWT.UsersRole;
+package com.my_app.my_app.security.sessioniWithJWT.UsersRole;
 
 public enum Role {
     USER,

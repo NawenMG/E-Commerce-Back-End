@@ -4,13 +4,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import jakarta.validation.constraints.NotBlank;
+
 
 
 @Node
 public class NodeProduct {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private String productId;
+
+    @NotBlank(message = "Obbligatorio")
     private String name;
+
+    @NotBlank(message = "Obbligatorio")
     private double price;
 
     // Relazione con la categoria del prodotto, belongs_to indica la categoria di appartenenza di un prodotto

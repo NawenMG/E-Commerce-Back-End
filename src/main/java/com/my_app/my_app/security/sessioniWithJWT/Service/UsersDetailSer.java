@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioniwithJWT.Service;
+package com.my_app.my_app.security.sessioniWithJWT.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

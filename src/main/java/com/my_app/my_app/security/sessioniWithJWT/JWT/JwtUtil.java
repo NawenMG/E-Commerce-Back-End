@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioniwithJWT.JWT;
+package com.my_app.my_app.security.sessioniWithJWT.JWT;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

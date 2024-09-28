@@ -1,7 +1,12 @@
 package com.my_app.my_app.dbrel.JDBC.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Categories {
+    @NotBlank(message = "Obbligatorio")
     private int categoriesID;  // Chiave primaria
+
+    @NotBlank(message = "Obbligatorio")
     private String name;       // Nome della categoria
 
     public Categories() {

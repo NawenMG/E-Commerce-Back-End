@@ -3,11 +3,18 @@ package com.my_app.my_app.dbG.Models.SistemaDiRaccomandazione;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Node
 public class NodeUserLocation {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private String locationId;
+
+    @NotBlank(message = "Obbligatorio")
     private String city;
+
+    @NotBlank(message = "Obbligatorio")
     private String country;
 
     public String getLocationId() {

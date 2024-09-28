@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.my_app.my_app.dbRT.Collections.PerSisNot.Notifica;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class SistemaNotifiche {
     @Autowired Notifica notifica;
+
+    @NotEmpty(message = "La lista non può essere vuota")
     private List<Notifica> notifiche;  
 
     // Costruttore

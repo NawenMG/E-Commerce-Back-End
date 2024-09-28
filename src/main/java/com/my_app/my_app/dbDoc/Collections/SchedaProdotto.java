@@ -1,6 +1,9 @@
 package com.my_app.my_app.dbDoc.Collections;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id; // Import corretto per @Id
 import java.util.HashMap;
 import java.util.Map;
@@ -8,9 +11,14 @@ import java.util.Map;
 @Document(collection = "schedaProdotto") 
 public class SchedaProdotto {
     @Id
-    private int idSchedaProdotto; 
+    @NotBlank(message = "Obbligatorio")
+    private int idSchedaProdotto;
+    
+    @NotBlank(message = "Obbligatorio")
     private String nome;
+
     private double prezzo;
+    
     private Map<String, Object> campiAggiuntivi = new HashMap<>(); //Per il client che può inserire nuovi campi, e così sfruttare mongodb
 
     public SchedaProdotto() {}

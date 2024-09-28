@@ -4,30 +4,39 @@ import org.influxdb.annotation.Column;
 import org.influxdb.annotation.Measurement;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Measurement(name = "SalesMonitoring")
 public class SalesMonitoring {
     // Tag
     @Column(name = "Product")
+    @NotBlank(message = "Obbligatorio")
     private String product; 
 
     @Column(name = "Category")
+    @NotBlank(message = "Obbligatorio")
     private String category; 
 
     @Column(name = "Venditore")
+    @NotBlank(message = "Obbligatorio")
     private String venditore; 
 
     // Field
     @Column(name = "NumeroOrdini")
+    @NotBlank(message = "Obbligatorio")
     private int numeroOrdini; 
 
     @Column(name = "NumeroUnitàVendute")
+    @NotBlank(message = "Obbligatorio")
     private int numeroUnitàVendute; 
 
     @Column(name = "Ricavo")
+    @NotBlank(message = "Obbligatorio")
     private double ricavo; 
 
     // Timestamp
     @Column(name = "TimeStamp")
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime timeStamp; 
 
     public SalesMonitoring() {

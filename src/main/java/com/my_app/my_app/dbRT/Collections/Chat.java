@@ -1,9 +1,13 @@
 package com.my_app.my_app.dbRT.Collections;
 
 import org.threeten.bp.LocalDate;
+
+import jakarta.validation.constraints.NotEmpty;
+
 import java.util.List;
 
 public class Chat {
+    @NotEmpty(message = "La lista non può essere vuota")
     private List<Conversazione> conversazioni; // Lista delle conversazioni
 
     public Chat() {

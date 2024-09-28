@@ -2,17 +2,34 @@ package com.my_app.my_app.dbrel.JDBC.model;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+
 
 
 
 public class Products {
-    private int productId;          
+    @NotBlank(message = "Obbligatorio")
+    private int productId;    
+    
+    @NotBlank(message = "Obbligatorio")
     private String nome;            
-    private double prezzo;          
-    private String descrizione;     
-    private String immagine;       
-    private int amountAvailable;     
+
+    @NotBlank(message = "Obbligatorio")
+    private double prezzo;     
+
+    @NotBlank(message = "Obbligatorio")
+    private String descrizione; 
+    
+    @NotBlank(message = "Obbligatorio")
+    private String immagine;  
+
+    @NotBlank(message = "Obbligatorio")
+    private int amountAvailable;  
+
+    @NotBlank(message = "Obbligatorio")
     private String categoria;
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate dataDiInserimento; 
 
     public Products(

@@ -1,14 +1,36 @@
 package com.my_app.my_app.dbrel.JDBC.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Users {
+    @NotBlank(message = "Obbligatorio")
     private int usersID;          // UsersID
+
+    @NotBlank(message = "Obbligatorio")
     private String nome;          // Nome
+
+    @NotBlank(message = "Obbligatorio")
     private String cognome;       // Cognome
+
+    @NotBlank(message = "Obbligatorio")
     private String ruolo;         // Ruolo
+
+    @NotBlank(message = "Obbligatorio")
     private String nomeUtente;    // NomeUtente
+
+    @NotBlank(message = "Obbligatorio")
+    @Email(message = "L'email non è valida")
     private String email;         // Email
+
+    @NotBlank(message = "Obbligatorio")
+    @Size(min = 10, max = 20, message = "Il nome deve avere tra i 10 e i 20 caratteri")
     private String password;      // Password
+
     private String immagine;      // Immagine
+
+    @NotBlank(message = "Obbligatorio")
     private int category;         // Category
 
     public Users(

@@ -3,6 +3,8 @@ package com.my_app.my_app.dbDoc.Collections;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,14 +13,26 @@ import java.util.Map;
 @Document(collection = "recensioni")
 public class Recensioni {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private int idReview;
+
+    @NotBlank(message = "Obbligatorio")
     private String titolo; 
+
+    @NotBlank(message = "Obbligatorio")
     private int rate;
+
     private String body;
+
+    @NotBlank(message = "Obbligatorio")
     private boolean verificadellAcquisto;
+
     private boolean like;
+
     private boolean dislike;
+
     private List<String> tags = new ArrayList<>(); 
+    
     private Map<String, Object> campiAggiuntivi = new HashMap<>(); // Per il client che può inserire nuovi campi
 
     public Recensioni() {}

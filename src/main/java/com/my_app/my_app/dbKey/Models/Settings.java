@@ -7,10 +7,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import jakarta.validation.constraints.NotBlank;
+
 @DynamoDBTable(tableName = "Settings")
 public class Settings {
+    @NotBlank(message = "Obbligatorio")
     private int userID;                // Partition Key
+
+    @NotBlank(message = "Obbligatorio")
     private int settingID;             // Sort Key
+
     private int prodottiPerPagina;
     private String tema;
     private String layout;

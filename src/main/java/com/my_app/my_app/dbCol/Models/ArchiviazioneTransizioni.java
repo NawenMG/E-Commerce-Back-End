@@ -4,14 +4,27 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Table("ArchiviazioneTransizioni")
 public class ArchiviazioneTransizioni {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private int id;
+
+    @NotBlank(message = "Obbligatorio")
     private int orderID;
+
+    @NotBlank(message = "Obbligatorio")
     private double totalImport;
+
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime data;
+
+    @NotBlank(message = "Obbligatorio")
     private String metodoDiPagamento;
+
+    @NotBlank(message = "Obbligatorio")
     private String status;
 
     public ArchiviazioneTransizioni() {

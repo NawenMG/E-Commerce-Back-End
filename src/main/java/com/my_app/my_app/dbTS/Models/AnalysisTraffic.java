@@ -4,25 +4,33 @@ import org.influxdb.annotation.Column;
 import org.influxdb.annotation.Measurement;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Measurement(name = "AnalysisTraffic")
 public class AnalysisTraffic {
     // Tag
+    @NotBlank(message = "Obbligatorio")
     @Column(name = "Url")
     private String url;
 
     // Field
     @Column(name = "NumeroVisite")
+    @NotBlank(message = "Obbligatorio")
     private int numeroVisite;
 
     @Column(name = "NumeroVisiteUniche")
+    @NotBlank(message = "Obbligatorio")
     private int numeroVisiteUniche;
 
     @Column(name = "DurataMediaVisite")
+    @NotBlank(message = "Obbligatorio")
     private double durataMediaVisite; 
 
     // Timestamp
     @Column(name = "TimeStamp")
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime timeStamp; 
+    
     public AnalysisTraffic() {
     }
 

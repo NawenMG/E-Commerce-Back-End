@@ -4,17 +4,36 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.threeten.bp.ZonedDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+
 @Table("ArchiviazioneSegnalazioni")
 public class ArchiviazioneSegnalazioni {
     @Id
+    @NotBlank(message = "Obbligatorio")
     private int id;
+
+    @NotBlank(message = "Obbligatorio")
     private String utente;
+
+    @NotBlank(message = "Obbligatorio")
     private String riferimento;
+
+    @NotBlank(message = "Obbligatorio")
     private ZonedDateTime data;
+
+    @NotBlank(message = "Obbligatorio")
     private String title;
+
+    @NotBlank(message = "Obbligatorio")
     private String body;
+
+    @NotBlank(message = "Obbligatorio")
     private String immagini;
+
+    @NotBlank(message = "Obbligatorio")
     private String audio;
+
+    @NotBlank(message = "Obbligatorio")
     private String video;
 
     public ArchiviazioneSegnalazioni() {

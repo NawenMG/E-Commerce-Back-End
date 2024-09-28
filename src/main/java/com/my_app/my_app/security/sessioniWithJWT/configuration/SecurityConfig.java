@@ -1,4 +1,4 @@
-package com.my_app.my_app.security.sessioni.configuration;
+package com.my_app.my_app.security.sessioniWithJWT.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,8 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import com.my_app.my_app.security.sessioni.JWT.JwtRequestFilter;
-import com.my_app.my_app.security.sessioni.Service.UsersDetailSer;
+import com.my_app.my_app.security.sessioniWithJWT.JWT.JwtRequestFilter;
+import com.my_app.my_app.security.sessioniWithJWT.Service.UsersDetailSer;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 

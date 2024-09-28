@@ -2,11 +2,22 @@ package com.my_app.my_app.dbrel.JDBC.model;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Returns {
+    @NotBlank(message = "Obbligatorio")
     private int returnsID;         // chiave primaria
+
+    @NotBlank(message = "Obbligatorio")
     private int usersID;           // chiave esterna per la tabella Users
+
+    @NotBlank(message = "Obbligatorio")
     private boolean status;         // stato del reso
+
+    @NotBlank(message = "Obbligatorio")
     private boolean accettazioneReso; // accettazione del reso
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate dataRichiesta; // data di richiesta del reso
 
     // Costruttore

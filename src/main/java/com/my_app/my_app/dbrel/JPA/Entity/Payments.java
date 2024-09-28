@@ -1,6 +1,8 @@
 package com.my_app.my_app.dbrel.JPA.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.Date;
 
 @Entity
@@ -9,11 +11,19 @@ public class Payments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotBlank(message = "Obbligatorio")
     private int PaymentsID;
 
+    @NotBlank(message = "Obbligatorio")
     private String Type;
+
+    @NotBlank(message = "Obbligatorio")
     private Date Data;
+
+    @NotBlank(message = "Obbligatorio")
     private boolean Status;
+
+    @NotBlank(message = "Obbligatorio")
     private double Total;
 
     // Costruttore di default

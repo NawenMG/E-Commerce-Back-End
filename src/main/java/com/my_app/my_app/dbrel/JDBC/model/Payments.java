@@ -2,11 +2,22 @@ package com.my_app.my_app.dbrel.JDBC.model;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Payments {
+    @NotBlank(message = "Obbligatorio")
     private int paymentsID;  // chiave primaria
+
+    @NotBlank(message = "Obbligatorio")
     private String type;     // tipo di pagamento
+
+    @NotBlank(message = "Obbligatorio")
     private LocalDate data;  // data del pagamento
+
+    @NotBlank(message = "Obbligatorio")
     private boolean status;   // stato del pagamento
+
+    @NotBlank(message = "Obbligatorio")
     private double total;     // totale del pagamento
 
     // Costruttore
