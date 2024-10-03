@@ -14,8 +14,7 @@ public class MyControllerEmail {
     private ServiceEmail serviceEmail;
 
     @PostMapping("/product")
-    public String sendProductEmail(@RequestBody Products product, @RequestParam String to) {
-        String subject = "Dettagli del Prodotto";
+    public String sendProductEmail(@RequestBody Products product, @RequestParam String to, @RequestParam String subject) {
 
         try {
             serviceEmail.sendProductEmail(to, subject, product);

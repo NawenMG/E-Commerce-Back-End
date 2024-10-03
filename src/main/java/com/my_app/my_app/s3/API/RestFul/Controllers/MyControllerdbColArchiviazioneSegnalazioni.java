@@ -18,7 +18,7 @@ import com.my_app.my_app.dbCol.Models.ArchiviazioneSegnalazioni;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/archiviazionesegnalazioni")
+@RequestMapping("s3/dbCol/archiviazionesegnalazioni")
 @PreAuthorize("hasRole('ADMIN', 'CONTROLLER')")
 public class MyControllerdbColArchiviazioneSegnalazioni {
     

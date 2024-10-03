@@ -18,7 +18,7 @@ import com.my_app.my_app.dbKey.Models.Cronologia;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/carrello")
+@RequestMapping("s3/dbKey/carrello")
 @PreAuthorize("hasRole('USER')")
 public class MyControllerdbKeyCronologia {
     

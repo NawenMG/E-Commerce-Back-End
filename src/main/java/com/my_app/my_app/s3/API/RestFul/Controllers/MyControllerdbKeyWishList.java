@@ -18,7 +18,7 @@ import com.my_app.my_app.dbKey.Models.WishList;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/wishlist")
+@RequestMapping("s3/dbKey/wishlist")
 @PreAuthorize("hasRole('ADMIN')")
 public class MyControllerdbKeyWishList {
     

@@ -18,9 +18,9 @@ import com.my_app.my_app.dbRT.Collections.PerChat.Messaggio;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/chat/spedizioni")
+@RequestMapping("s3/dbRT/sistema/spedizioni")
 @PreAuthorize("hasRole('USER')")
-public class MyControllerSpedizioniSistema {
+public class MyControllerdbRTSpedizioniSistema {
     
      @Autowired
     private s3Ser s3Service;

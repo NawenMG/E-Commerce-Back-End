@@ -18,7 +18,7 @@ import com.my_app.my_app.dbRT.Collections.PerChat.Messaggio;
 import com.my_app.my_app.s3.Services.s3Ser;
 
 @RestController
-@RequestMapping("s3/dbRel/chat/notifica")
+@RequestMapping("s3/dbRT/sistema/notifica")
 @PreAuthorize("hasRole('ADMIN')")
 public class MyControllerdbRTNotificaSistemaNotifiche {
     
