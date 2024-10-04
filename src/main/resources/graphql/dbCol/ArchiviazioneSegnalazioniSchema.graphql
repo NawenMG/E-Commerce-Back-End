@@ -1,0 +1,48 @@
+# Definizione del tipo ArchiviazioneSegnalazioni
+type ArchiviazioneSegnalazioni {
+    id: Int!
+    utente: String!
+    riferimento: String!
+    data: DateTime! # Usa il tipo scalare DateTime
+    title: String!
+    body: String!
+    immagini: String!
+    audio: String!
+    video: String!
+}
+
+# Input per i parametri di ricerca
+input ArchiviazioneSegnalazioniFilter {
+    id: Int
+    utente: String
+    riferimento: String
+    dataFrom: DateTime # Cambiato in DateTime
+    dataTo: DateTime   # Cambiato in DateTime
+    title: String
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultSegnalazioni {
+    segnalazioni: [ArchiviazioneSegnalazioni]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getSegnalazioni(params: ParamQueryInput, filter: ArchiviazioneSegnalazioniFilter): QueryResultSegnalazioni
+}

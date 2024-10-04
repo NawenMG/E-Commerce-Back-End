@@ -1,0 +1,35 @@
+# Definizione del tipo SchedaProdotto
+type SchedaProdotto {
+    idSchedaProdotto: Int!
+    nome: String!
+    prezzo: Float
+    campiAggiuntivi: [String: Any]
+}
+
+# Input per i parametri di ricerca
+input SchedaProdottoFilter {
+    idSchedaProdotto: Int
+    nome: String
+    prezzo: Float
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    condizioneWhere: String
+    valoriWhere: String
+    prezzo: Float
+    nome: String
+    limit: Int
+    offset: Int
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultSchedaProdotto {
+    schedaProdotto: [SchedaProdotto]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getSchedaProdotto(params: ParamQueryInput, filter: SchedaProdottoFilter): QueryResultSchedaProdotto
+}

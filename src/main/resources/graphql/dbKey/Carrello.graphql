@@ -1,0 +1,41 @@
+# Definizione del tipo Carrello
+type Carrello {
+    userID: Int!
+    productID: Int!
+    productName: String!
+    productPrice: Float!
+    productImage: String
+    productText: String
+    productCompany: String!
+}
+
+# Input per i parametri di ricerca per Carrello
+input CarrelloFilter {
+    userID: Int
+    productID: Int
+    productName: String
+    productPrice: Float
+    productCompany: String
+}
+
+# Tipo di output per il risultato delle query Carrello
+type QueryResultCarrello {
+    items: [Carrello]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    partitionKeyCondition: String
+    sortKeyCondition: String
+    attributeValues: Map[String, String]
+    filterExpression: String
+    projectionExpression: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getCarrello(params: ParamQueryInput, filter: CarrelloFilter): QueryResultCarrello
+}

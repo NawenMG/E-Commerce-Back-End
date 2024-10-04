@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> 
     </parent>
     <groupId>com.example</groupId>
     <artifactId>demo</artifactId>
@@ -169,7 +169,7 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.9.1</version> <!-- Assicurati di usare l'ultima versione -->
+            <version>0.9.1</version>
         </dependency>
         <!--Validazione-->
         <dependency>
@@ -196,15 +196,22 @@
             <artifactId>guava</artifactId>
             <version>33.3.1-jre</version>
         </dependency>
-        
-        
-        
-        
-        
 
-
-
-       
+        <!--Graphql-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-graphql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>22.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-scalars</artifactId>
+            <version>22.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

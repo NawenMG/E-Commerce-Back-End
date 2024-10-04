@@ -1,0 +1,39 @@
+# Definizione del tipo AnalysisTraffic
+type AnalysisTraffic {
+    url: String!
+    numeroVisite: Int!
+    numeroVisiteUniche: Int!
+    durataMediaVisite: Float!
+    timeStamp: String!
+}
+
+# Input per i parametri di ricerca per AnalysisTraffic
+input AnalysisTrafficFilter {
+    url: String
+    numeroVisite: Int
+    numeroVisiteUniche: Int
+    durataMediaVisite: Float
+    timeStamp: String
+}
+
+# Tipo di output per il risultato delle query AnalysisTraffic
+type QueryResultAnalysisTraffic {
+    items: [AnalysisTraffic!]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    measurement: String
+    timeRangeStart: String
+    timeRangeEnd: String
+    whereClause: String
+    orderBy: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getAnalysisTraffic(params: ParamQueryInput, filter: AnalysisTrafficFilter): QueryResultAnalysisTraffic
+}

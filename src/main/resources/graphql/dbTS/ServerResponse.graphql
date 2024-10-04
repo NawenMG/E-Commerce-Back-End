@@ -1,0 +1,41 @@
+# Definizione del tipo ServerResponse
+type ServerResponse {
+    server: String!
+    endpoint: String!
+    responseTimeAverage: Float!
+    requestNumbers: Int!
+    errorsNumbers: Int!
+    timeStamp: String!
+}
+
+# Input per i parametri di ricerca per ServerResponse
+input ServerResponseFilter {
+    server: String
+    endpoint: String
+    responseTimeAverage: Float
+    requestNumbers: Int
+    errorsNumbers: Int
+    timeStamp: String
+}
+
+# Tipo di output per il risultato delle query ServerResponse
+type QueryResultServerResponse {
+    items: [ServerResponse!]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    measurement: String
+    timeRangeStart: String
+    timeRangeEnd: String
+    whereClause: String
+    orderBy: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getServerResponses(params: ParamQueryInput, filter: ServerResponseFilter): QueryResultServerResponse
+}

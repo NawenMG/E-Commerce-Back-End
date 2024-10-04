@@ -1,0 +1,42 @@
+# Definizione del tipo Settings
+type Settings {
+    userID: Int!
+    settingID: Int!
+    prodottiPerPagina: Int
+    tema: String
+    layout: String
+    lingua: String
+    notifiche: Map[String, Boolean]
+}
+
+# Input per i parametri di ricerca per Settings
+input SettingsFilter {
+    userID: Int
+    settingID: Int
+    prodottiPerPagina: Int
+    tema: String
+    layout: String
+    lingua: String
+}
+
+# Tipo di output per il risultato delle query Settings
+type QueryResultSettings {
+    items: [Settings]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    partitionKeyCondition: String
+    sortKeyCondition: String
+    attributeValues: Map[String, String]
+    filterExpression: String
+    projectionExpression: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getSettings(params: ParamQueryInput, filter: SettingsFilter): QueryResultSettings
+}

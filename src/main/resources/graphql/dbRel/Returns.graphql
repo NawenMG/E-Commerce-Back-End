@@ -1,0 +1,50 @@
+# Definizione del tipo Returns
+type Returns {
+    returnsID: Int!
+    usersID: Int!
+    status: Boolean!
+    accettazioneReso: Boolean!
+    dataRichiesta: String!
+}
+
+# Input per i parametri di ricerca per Returns
+input ReturnsFilter {
+    returnsID: Int
+    usersID: Int
+    status: Boolean
+    accettazioneReso: Boolean
+    dataRichiesta: String
+}
+
+# Tipo di output per il risultato delle query Returns
+type QueryResultReturns {
+    items: [Returns]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getReturns(params: ParamQueryInput, filter: ReturnsFilter): QueryResultReturns
+}

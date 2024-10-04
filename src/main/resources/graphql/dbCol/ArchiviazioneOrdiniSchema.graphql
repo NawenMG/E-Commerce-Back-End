@@ -1,0 +1,53 @@
+# Definizione del tipo ArchiviazioneOrdini
+type ArchiviazioneOrdini {
+    id: Int!
+    userID: Int!
+    orderDate: String!
+    status: String!
+    totalImport: Float!
+    indirizzo: String!
+    articoliOrdine: [String!]!
+    dataConsegna: String!
+    corriere: String!
+}
+
+# Input per i parametri di ricerca
+input ArchiviazioneOrdiniFilter {
+    id: Int
+    userID: Int
+    status: String
+    orderDateFrom: String
+    orderDateTo: String
+    totalImportMin: Float
+    totalImportMax: Float
+    indirizzo: String
+    corriere: String
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Tipo di output per il risultato delle query
+type QueryResult {
+    ordini: [ArchiviazioneOrdini]!
+    totalCount: Int
+    averageImport: Float
+    sumImport: Float
+}
+
+# Query universale
+type Query {
+    getOrdini(params: ParamQueryInput, filter: ArchiviazioneOrdiniFilter): QueryResult
+}

@@ -1,0 +1,43 @@
+# Definizione del tipo NodeUserLocation
+type NodeUserLocation {
+    locationId: String!
+    city: String!
+    country: String!
+}
+
+# Input per i parametri di ricerca
+input NodeUserLocationFilter {
+    locationId: String
+    city: String
+    country: String
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    whereCondition: String
+    relationshipType: String
+    nodeLabel: String
+    orderBy: Boolean
+    orderByField: String
+    limit: Int
+    skip: Int
+    pattern: String
+    returnFields: String
+    count: Boolean
+    min: Boolean
+    max: Boolean
+    avg: Boolean
+    sum: Boolean
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultNodeUserLocation {
+    locations: [NodeUserLocation]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getNodeUserLocation(params: ParamQueryInput, filter: NodeUserLocationFilter): QueryResultNodeUserLocation
+}

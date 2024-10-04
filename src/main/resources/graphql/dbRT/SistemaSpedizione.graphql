@@ -1,0 +1,69 @@
+# Definizione del tipo User
+type User {
+    userID: Int!
+    nome: String!
+    cognome: String!
+    email: String!
+    indirizzo: String
+    phoneNumber: String
+}
+
+# Definizione del tipo Spedizione
+type Spedizione {
+    spedizioneID: Int!
+    aziendaInCaricoPerLaSpedizione: String!
+    consegna: Boolean!
+    dataDiConsegnaPrevista: String # Formattato come stringa per la data
+    ritardo: String # Formattato come stringa per la data
+    locazioneCorrente: String!
+    storicoLocazioni: [String]!
+    timeStamp: String # Formattato come stringa per la data
+    utenti: [User]!
+}
+
+# Definizione del tipo SistemaSpedizione
+type SistemaSpedizione {
+    spedizioni: [Spedizione!]!
+}
+
+# Input per i parametri di ricerca per Spedizioni
+input SpedizioneFilter {
+    spedizioneID: Int
+    aziendaInCaricoPerLaSpedizione: String
+    consegna: Boolean
+    dataDiConsegnaPrevista: String
+    locazioneCorrente: String
+}
+
+# Tipo di output per il risultato delle query Spedizioni
+type QueryResultSpedizione {
+    items: [Spedizione]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getSistemaSpedizione(params: ParamQueryInput, filter: SpedizioneFilter): QueryResultSpedizione
+}

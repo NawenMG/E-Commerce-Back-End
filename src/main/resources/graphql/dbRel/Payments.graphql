@@ -1,0 +1,50 @@
+# Definizione del tipo Payments
+type Payments {
+    paymentsID: Int!
+    type: String!
+    data: String!
+    status: Boolean!
+    total: Float!
+}
+
+# Input per i parametri di ricerca per Payments
+input PaymentsFilter {
+    paymentsID: Int
+    type: String
+    data: String
+    status: Boolean
+    total: Float
+}
+
+# Tipo di output per il risultato delle query Payments
+type QueryResultPayments {
+    items: [Payments]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getPayments(params: ParamQueryInput, filter: PaymentsFilter): QueryResultPayments
+}

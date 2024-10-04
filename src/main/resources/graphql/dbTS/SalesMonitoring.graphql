@@ -1,0 +1,43 @@
+# Definizione del tipo SalesMonitoring
+type SalesMonitoring {
+    product: String!
+    category: String!
+    venditore: String!
+    numeroOrdini: Int!
+    numeroUnitàVendute: Int!
+    ricavo: Float!
+    timeStamp: String!
+}
+
+# Input per i parametri di ricerca per SalesMonitoring
+input SalesMonitoringFilter {
+    product: String
+    category: String
+    venditore: String
+    numeroOrdini: Int
+    numeroUnitàVendute: Int
+    ricavo: Float
+    timeStamp: String
+}
+
+# Tipo di output per il risultato delle query SalesMonitoring
+type QueryResultSalesMonitoring {
+    items: [SalesMonitoring!]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    measurement: String
+    timeRangeStart: String
+    timeRangeEnd: String
+    whereClause: String
+    orderBy: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getSalesMonitoring(params: ParamQueryInput, filter: SalesMonitoringFilter): QueryResultSalesMonitoring
+}

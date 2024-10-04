@@ -1,0 +1,49 @@
+# Definizione del tipo ArchiviazioneTransizioni
+type ArchiviazioneTransizioni {
+    id: Int!
+    orderID: Int!
+    totalImport: Float!
+    data: String!
+    metodoDiPagamento: String!
+    status: String!
+}
+
+# Input per i parametri di ricerca
+input ArchiviazioneTransizioniFilter {
+    id: Int
+    orderID: Int
+    totalImportMin: Float
+    totalImportMax: Float
+    dataFrom: String
+    dataTo: String
+    metodoDiPagamento: String
+    status: String
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Tipo di output per il risultato delle query
+type QueryResult {
+    transizioni: [ArchiviazioneTransizioni]!
+    totalCount: Int
+    averageImport: Float
+    sumImport: Float
+}
+
+# Query universale
+type Query {
+    getTransizioni(params: ParamQueryInput, filter: ArchiviazioneTransizioniFilter): QueryResult
+}

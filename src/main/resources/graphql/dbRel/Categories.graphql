@@ -1,0 +1,44 @@
+# Definizione del tipo Categories
+type Categories {
+    categoriesID: Int!
+    name: String!
+}
+
+# Input per i parametri di ricerca per Categories
+input CategoriesFilter {
+    categoriesID: Int
+    name: String
+}
+
+# Tipo di output per il risultato delle query Categories
+type QueryResultCategories {
+    items: [Categories]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getCategories(params: ParamQueryInput, filter: CategoriesFilter): QueryResultCategories
+}

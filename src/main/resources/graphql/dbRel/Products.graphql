@@ -1,0 +1,56 @@
+# Definizione del tipo Products
+type Products {
+    productId: Int!
+    nome: String!
+    prezzo: Float!
+    descrizione: String!
+    immagine: String!
+    amountAvailable: Int!
+    categoria: String!
+    dataDiInserimento: String!
+}
+
+# Input per i parametri di ricerca per Products
+input ProductsFilter {
+    productId: Int
+    nome: String
+    prezzo: Float
+    descrizione: String
+    immagine: String
+    amountAvailable: Int
+    categoria: String
+    dataDiInserimento: String
+}
+
+# Tipo di output per il risultato delle query Products
+type QueryResultProducts {
+    items: [Products]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getProducts(params: ParamQueryInput, filter: ProductsFilter): QueryResultProducts
+}

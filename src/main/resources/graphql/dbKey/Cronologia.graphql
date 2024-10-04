@@ -1,0 +1,41 @@
+# Definizione del tipo Cronologia
+type Cronologia {
+    userID: Int!
+    productID: Int!
+    productName: String!
+    productPrice: Float!
+    productImage: String
+    productText: String
+    productCompany: String!
+}
+
+# Input per i parametri di ricerca per Cronologia
+input CronologiaFilter {
+    userID: Int
+    productID: Int
+    productName: String
+    productPrice: Float
+    productCompany: String
+}
+
+# Tipo di output per il risultato delle query Cronologia
+type QueryResultCronologia {
+    items: [Cronologia]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    partitionKeyCondition: String
+    sortKeyCondition: String
+    attributeValues: Map[String, String]
+    filterExpression: String
+    projectionExpression: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getCronologia(params: ParamQueryInput, filter: CronologiaFilter): QueryResultCronologia
+}

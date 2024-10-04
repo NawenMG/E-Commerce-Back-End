@@ -1,0 +1,46 @@
+# Definizione del tipo Recensioni
+type Recensioni {
+    idReview: Int!
+    titolo: String!
+    rate: Int!
+    body: String
+    verificadellAcquisto: Boolean!
+    like: Boolean
+    dislike: Boolean
+    tags: [String!]!
+    campiAggiuntivi: [String: Any]
+}
+
+# Input per i parametri di ricerca
+input RecensioniFilter {
+    idReview: Int
+    titolo: String
+    rate: Int
+    verificadellAcquisto: Boolean
+    like: Boolean
+    dislike: Boolean
+    tags: [String]
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    condizioneWhere: String
+    valoriWhere: String
+    rate: Int
+    verificadellAcquisto: Boolean
+    like: String
+    inTags: String
+    limit: Int
+    offset: Int
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultRecensioni {
+    recensioni: [Recensioni]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getRecensioni(params: ParamQueryInput, filter: RecensioniFilter): QueryResultRecensioni
+}

@@ -1,0 +1,57 @@
+# Definizione del tipo Notifica
+type Notifica {
+    notificaID: Int!
+    text: String!
+    audio: String
+    immagine: String
+    video: String
+    consegna: Boolean!
+    visualizzazione: Boolean!
+    destinatario: String!
+}
+
+# Definizione del tipo SistemaNotifiche
+type SistemaNotifiche {
+    notifiche: [Notifica!]!
+}
+
+# Input per i parametri di ricerca per Notifiche
+input NotificaFilter {
+    notificaID: Int
+    destinatario: String
+    visualizzazione: Boolean
+    consegna: Boolean
+}
+
+# Tipo di output per il risultato delle query Notifiche
+type QueryResultNotifica {
+    items: [Notifica]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getSistemaNotifiche(params: ParamQueryInput, filter: NotificaFilter): QueryResultNotifica
+}

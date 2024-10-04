@@ -1,0 +1,48 @@
+# Definizione del tipo NodeUser
+type NodeUser {
+    userId: String!
+    name: String!
+    email: String!
+    location: String!
+    purchasedProducts: [NodeProduct]!
+    visitedProducts: [NodeProduct]!
+    nodeUserLocation: NodeUserLocation
+}
+
+# Input per i parametri di ricerca
+input NodeUserFilter {
+    userId: String
+    name: String
+    email: String
+    location: String
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    whereCondition: String
+    relationshipType: String
+    nodeLabel: String
+    orderBy: Boolean
+    orderByField: String
+    limit: Int
+    skip: Int
+    pattern: String
+    returnFields: String
+    count: Boolean
+    min: Boolean
+    max: Boolean
+    avg: Boolean
+    sum: Boolean
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultNodeUser {
+    users: [NodeUser]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getNodeUser(params: ParamQueryInput, filter: NodeUserFilter): QueryResultNodeUser
+}

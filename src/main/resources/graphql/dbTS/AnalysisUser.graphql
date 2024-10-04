@@ -1,0 +1,39 @@
+# Definizione del tipo AnalysisUser
+type AnalysisUser {
+    user: String!
+    typeDevice: String!
+    action: String!
+    duringAction: Int!
+    timestamp: String!
+}
+
+# Input per i parametri di ricerca per AnalysisUser
+input AnalysisUserFilter {
+    user: String
+    typeDevice: String
+    action: String
+    duringAction: Int
+    timestamp: String
+}
+
+# Tipo di output per il risultato delle query AnalysisUser
+type QueryResultAnalysisUser {
+    items: [AnalysisUser!]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    measurement: String
+    timeRangeStart: String
+    timeRangeEnd: String
+    whereClause: String
+    orderBy: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getAnalysisUser(params: ParamQueryInput, filter: AnalysisUserFilter): QueryResultAnalysisUser
+}

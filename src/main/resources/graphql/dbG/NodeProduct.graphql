@@ -1,0 +1,44 @@
+# Definizione del tipo NodeProduct
+type NodeProduct {
+    productId: String!
+    name: String!
+    price: Float!
+    category: NodeCategoryProduct
+}
+
+# Input per i parametri di ricerca
+input NodeProductFilter {
+    productId: String
+    name: String
+    price: Float
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    whereCondition: String
+    relationshipType: String
+    nodeLabel: String
+    orderBy: Boolean
+    orderByField: String
+    limit: Int
+    skip: Int
+    pattern: String
+    returnFields: String
+    count: Boolean
+    min: Boolean
+    max: Boolean
+    avg: Boolean
+    sum: Boolean
+}
+
+# Tipo di output per il risultato delle query
+type QueryResultNodeProduct {
+    products: [NodeProduct]!
+    totalCount: Int
+}
+
+# Query universale
+type Query {
+    getNodeProduct(params: ParamQueryInput, filter: NodeProductFilter): QueryResultNodeProduct
+}

@@ -1,0 +1,41 @@
+# Definizione del tipo WishList
+type WishList {
+    userID: Int!
+    productID: Int!
+    productName: String!
+    productPrice: Float!
+    productImage: String
+    productText: String
+    productCompany: String!
+}
+
+# Input per i parametri di ricerca per WishList
+input WishListFilter {
+    userID: Int
+    productID: Int
+    productName: String
+    productPrice: Float
+    productCompany: String
+}
+
+# Tipo di output per il risultato delle query WishList
+type QueryResultWishList {
+    items: [WishList]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    partitionKeyCondition: String
+    sortKeyCondition: String
+    attributeValues: Map[String, String]
+    filterExpression: String
+    projectionExpression: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getWishList(params: ParamQueryInput, filter: WishListFilter): QueryResultWishList
+}

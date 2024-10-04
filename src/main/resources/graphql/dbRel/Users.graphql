@@ -1,0 +1,56 @@
+# Definizione del tipo Users
+type Users {
+    usersID: Int!
+    nome: String!
+    cognome: String!
+    ruolo: String!
+    nomeUtente: String!
+    email: String!
+    password: String!
+    immagine: String
+    category: Int!
+}
+
+# Input per i parametri di ricerca per Users
+input UsersFilter {
+    usersID: Int
+    nome: String
+    cognome: String
+    ruolo: String
+    nomeUtente: String
+    email: String
+    category: Int
+}
+
+# Tipo di output per il risultato delle query Users
+type QueryResultUsers {
+    items: [Users]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getUsers(params: ParamQueryInput, filter: UsersFilter): QueryResultUsers
+}

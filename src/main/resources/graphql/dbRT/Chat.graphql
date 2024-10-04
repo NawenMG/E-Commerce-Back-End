@@ -1,0 +1,66 @@
+# Definizione del tipo Messaggio
+type Messaggio {
+    text: String!
+    visualizzazione: Boolean!
+    audio: String
+    immagine: String
+    video: String
+    mittente: String!
+    destinatario: String!
+    timeStamp: String! 
+}
+
+# Definizione del tipo Conversazione
+type Conversazione {
+    conversazioneID: Int!
+    mutaConversazione: Boolean!
+    bloccoConversazione: Boolean!
+    users: [String!]!
+    messaggi: [Messaggio]!
+}
+
+# Definizione del tipo Chat
+type Chat {
+    conversazioni: [Conversazione!]!
+}
+
+# Input per i parametri di ricerca per Chat
+input ChatFilter {
+    conversazioneID: Int
+    mutaConversazione: Boolean
+    bloccoConversazione: Boolean
+    users: [String!]
+}
+
+# Tipo di output per il risultato delle query Chat
+type QueryResultChat {
+    items: [Chat]!
+    totalCount: Int
+}
+
+# Input per i parametri di query
+input ParamQueryInput {
+    distinct: Boolean
+    condizioneWhere: String
+    valoriWhere: String
+    boleani: String
+    orderBy: Boolean
+    top: Int
+    min: Boolean
+    max: Boolean
+    count: Boolean
+    avg: Boolean
+    sum: Boolean
+    all: Boolean
+    like: String
+    in: String
+    between: [String]
+    having: String
+    limit: Int
+    offset: Int
+}
+
+# Query universale
+type Query {
+    getChats(params: ParamQueryInput, filter: ChatFilter): QueryResultChat
+}
