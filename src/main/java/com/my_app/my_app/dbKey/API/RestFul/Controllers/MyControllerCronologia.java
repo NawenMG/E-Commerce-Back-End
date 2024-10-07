@@ -27,8 +27,8 @@ public class MyControllerCronologia {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Void> saveOrUpdate(@RequestBody Carrello carrello) {
-        cronologiaSer.saveOrUpdate(carrello);
+    public ResponseEntity<Void> saveOrUpdate(@RequestBody Cronologia cronologia) {
+        cronologiaSer.saveOrUpdate(cronologia);
         return ResponseEntity.ok().build();
     }
 

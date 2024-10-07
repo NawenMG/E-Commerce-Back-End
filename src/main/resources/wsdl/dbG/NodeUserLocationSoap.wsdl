@@ -1,0 +1,114 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="NodeUserLocationService"
+             targetNamespace="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione">
+            <xsd:element name="NodeUserLocation">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:string"/>
+                        <xsd:element name="location" type="xsd:string"/>
+                        <xsd:element name="timestamp" type="xsd:dateTime"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="whereCondition" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="skip" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getLocationsRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getLocationsResponse">
+        <part name="locations" element="tns:NodeUserLocation"/>
+    </message>
+    <message name="insertLocationRequest">
+        <part name="location" element="tns:NodeUserLocation"/>
+    </message>
+    <message name="insertLocationResponse"/>
+    <message name="updateLocationRequest">
+        <part name="location" element="tns:NodeUserLocation"/>
+    </message>
+    <message name="updateLocationResponse"/>
+    <message name="deleteLocationRequest">
+        <part name="userId" type="xsd:string"/>
+    </message>
+    <message name="deleteLocationResponse"/>
+
+    <portType name="NodeUserLocationServicePortType">
+        <operation name="getLocations">
+            <input message="tns:getLocationsRequest"/>
+            <output message="tns:getLocationsResponse"/>
+        </operation>
+        <operation name="insertLocation">
+            <input message="tns:insertLocationRequest"/>
+            <output message="tns:insertLocationResponse"/>
+        </operation>
+        <operation name="updateLocation">
+            <input message="tns:updateLocationRequest"/>
+            <output message="tns:updateLocationResponse"/>
+        </operation>
+        <operation name="deleteLocation">
+            <input message="tns:deleteLocationRequest"/>
+            <output message="tns:deleteLocationResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="NodeUserLocationServiceBinding" type="tns:NodeUserLocationServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getLocations">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/getLocations"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertLocation">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/insertLocation"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateLocation">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/updateLocation"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteLocation">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/deleteLocation"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="NodeUserLocationService">
+        <port name="NodeUserLocationServicePort" binding="tns:NodeUserLocationServiceBinding">
+            <soap:address location="http://localhost:8080/ws/nodeUserLocationService"/>
+        </port>
+    </service>
+</definitions>

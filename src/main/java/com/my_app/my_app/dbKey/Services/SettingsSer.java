@@ -24,8 +24,8 @@ public class SettingsSer {
     }
 
     @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
-    public void saveOrUpdate(Carrello carrello) {
-        settingsRep.saveOrUpdate(carrello);
+    public void saveOrUpdate(Settings settings) {
+        settingsRep.saveOrUpdate(settings);
     }
 
     @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")

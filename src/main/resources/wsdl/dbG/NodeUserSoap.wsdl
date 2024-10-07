@@ -1,0 +1,115 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="NodeUserService"
+             targetNamespace="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione">
+            <xsd:element name="NodeUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:string"/>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="email" type="xsd:string"/>
+                        <xsd:element name="location" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="whereCondition" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="skip" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getUsersRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getUsersResponse">
+        <part name="users" element="tns:NodeUser"/>
+    </message>
+    <message name="insertUserRequest">
+        <part name="user" element="tns:NodeUser"/>
+    </message>
+    <message name="insertUserResponse"/>
+    <message name="updateUserRequest">
+        <part name="user" element="tns:NodeUser"/>
+    </message>
+    <message name="updateUserResponse"/>
+    <message name="deleteUserRequest">
+        <part name="userId" type="xsd:string"/>
+    </message>
+    <message name="deleteUserResponse"/>
+
+    <portType name="NodeUserServicePortType">
+        <operation name="getUsers">
+            <input message="tns:getUsersRequest"/>
+            <output message="tns:getUsersResponse"/>
+        </operation>
+        <operation name="insertUser">
+            <input message="tns:insertUserRequest"/>
+            <output message="tns:insertUserResponse"/>
+        </operation>
+        <operation name="updateUser">
+            <input message="tns:updateUserRequest"/>
+            <output message="tns:updateUserResponse"/>
+        </operation>
+        <operation name="deleteUser">
+            <input message="tns:deleteUserRequest"/>
+            <output message="tns:deleteUserResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="NodeUserServiceBinding" type="tns:NodeUserServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getUsers">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/getUsers"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/insertUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/updateUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/SistemaDiRaccomandazione/deleteUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="NodeUserService">
+        <port name="NodeUserServicePort" binding="tns:NodeUserServiceBinding">
+            <soap:address location="http://localhost:8080/ws/nodeUserService"/>
+        </port>
+    </service>
+</definitions>

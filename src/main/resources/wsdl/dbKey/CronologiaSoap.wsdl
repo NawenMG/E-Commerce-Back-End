@@ -1,0 +1,120 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbG/API/Soap/Cronologia"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="CronologiaService"
+             targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Cronologia">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Cronologia">
+            <xsd:element name="Cronologia">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userID" type="xsd:int"/>
+                        <xsd:element name="productID" type="xsd:int"/>
+                        <xsd:element name="productName" type="xsd:string"/>
+                        <xsd:element name="productPrice" type="xsd:double"/>
+                        <xsd:element name="productImage" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="productText" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="productCompany" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="partitionKeyCondition" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="sortKeyCondition" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="offset" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getCronologieRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getCronologieResponse">
+        <part name="cronologie" element="tns:Cronologia" maxOccurs="unbounded"/>
+    </message>
+    <message name="insertCronologiaRequest">
+        <part name="cronologia" element="tns:Cronologia"/>
+    </message>
+    <message name="insertCronologiaResponse"/>
+    <message name="updateCronologiaRequest">
+        <part name="cronologia" element="tns:Cronologia"/>
+    </message>
+    <message name="updateCronologiaResponse"/>
+    <message name="deleteCronologiaRequest">
+        <part name="userID" type="xsd:int"/>
+        <part name="productID" type="xsd:int"/>
+    </message>
+    <message name="deleteCronologiaResponse"/>
+
+    <portType name="CronologiaServicePortType">
+        <operation name="getCronologie">
+            <input message="tns:getCronologieRequest"/>
+            <output message="tns:getCronologieResponse"/>
+        </operation>
+        <operation name="insertCronologia">
+            <input message="tns:insertCronologiaRequest"/>
+            <output message="tns:insertCronologiaResponse"/>
+        </operation>
+        <operation name="updateCronologia">
+            <input message="tns:updateCronologiaRequest"/>
+            <output message="tns:updateCronologiaResponse"/>
+        </operation>
+        <operation name="deleteCronologia">
+            <input message="tns:deleteCronologiaRequest"/>
+            <output message="tns:deleteCronologiaResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="CronologiaServiceBinding" type="tns:CronologiaServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getCronologie">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Cronologia/getCronologie"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertCronologia">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Cronologia/insertCronologia"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateCronologia">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Cronologia/updateCronologia"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteCronologia">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Cronologia/deleteCronologia"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="CronologiaService">
+        <port name="CronologiaServicePort" binding="tns:CronologiaServiceBinding">
+            <soap:address location="http://localhost:8080/ws/cronologiaService"/>
+        </port>
+    </service>
+</definitions>

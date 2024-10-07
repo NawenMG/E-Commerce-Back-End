@@ -10,7 +10,7 @@ public interface WishListI {
     
     List<WishList> search(ParamQuery paramQuery);
     
-    void saveOrUpdate(Carrello carrello);
+    void saveOrUpdate(WishList wishList);
     
     Carrello findById(int userID, int productID);
     

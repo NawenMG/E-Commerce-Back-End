@@ -1,0 +1,93 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://my_app.com/my_app/soap"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://my_app.com/my_app/soap">
+
+    <message name="GetSegnalazioniRequest">
+        <part name="paramQuery" element="tns:paramQuery"/>
+    </message>
+    <message name="GetSegnalazioniResponse">
+        <part name="segnalazioni" element="tns:segnalazioneList"/>
+    </message>
+
+    <message name="InsertSegnalazioneRequest">
+        <part name="segnalazione" element="tns:segnalazione"/>
+    </message>
+    <message name="InsertSegnalazioneResponse"/>
+    
+    <message name="UpdateSegnalazioneRequest">
+        <part name="segnalazione" element="tns:segnalazione"/>
+    </message>
+    <message name="UpdateSegnalazioneResponse"/>
+    
+    <message name="DeleteSegnalazioneRequest">
+        <part name="id" element="tns:id"/>
+    </message>
+    <message name="DeleteSegnalazioneResponse"/>
+
+    <portType name="ArchiviazioneSegnalazioniPortType">
+        <operation name="getSegnalazioni">
+            <input message="tns:GetSegnalazioniRequest"/>
+            <output message="tns:GetSegnalazioniResponse"/>
+        </operation>
+        <operation name="insertSegnalazione">
+            <input message="tns:InsertSegnalazioneRequest"/>
+            <output message="tns:InsertSegnalazioneResponse"/>
+        </operation>
+        <operation name="updateSegnalazione">
+            <input message="tns:UpdateSegnalazioneRequest"/>
+            <output message="tns:UpdateSegnalazioneResponse"/>
+        </operation>
+        <operation name="deleteSegnalazione">
+            <input message="tns:DeleteSegnalazioneRequest"/>
+            <output message="tns:DeleteSegnalazioneResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ArchiviazioneSegnalazioniBinding" type="tns:ArchiviazioneSegnalazioniPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getSegnalazioni">
+            <soap:operation soapAction="getSegnalazioni"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertSegnalazione">
+            <soap:operation soapAction="insertSegnalazione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateSegnalazione">
+            <soap:operation soapAction="updateSegnalazione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteSegnalazione">
+            <soap:operation soapAction="deleteSegnalazione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ArchiviazioneSegnalazioniService">
+        <port name="ArchiviazioneSegnalazioniPort" binding="tns:ArchiviazioneSegnalazioniBinding">
+            <soap:address location="http://localhost:8080/ws/archiviazioneSegnalazioni"/>
+        </port>
+    </service>
+</definitions>

@@ -6,6 +6,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.my_app.my_app.dbKey.Models.Carrello;
 import com.my_app.my_app.dbKey.Models.WishList;
 import com.my_app.my_app.dbKey.Parametri.ParamQuery;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,17 +57,17 @@ public class WishListRep {
         return dynamoDBMapper.query(WishList.class, queryExpression);
     }
 
-     // Salva o aggiorna un Carrello
-    public void saveOrUpdate(Carrello carrello) {
-        dynamoDBMapper.save(carrello);
+     // Salva o aggiorna  wishlist
+    public void saveOrUpdate(WishList list) {
+        dynamoDBMapper.save(list);
     }
 
-    // Trova un Carrello per userID e productID
+    // Trova wishlist per userID e productID
     public Carrello findById(int userID, int productID) {
         return dynamoDBMapper.load(Carrello.class, userID, productID);
     }
 
-    // Elimina un Carrello per userID e productID
+    // Elimina wishlist per userID e productID
     public void deleteById(int userID, int productID) {
         Carrello carrello = findById(userID, productID);
         if (carrello != null) {

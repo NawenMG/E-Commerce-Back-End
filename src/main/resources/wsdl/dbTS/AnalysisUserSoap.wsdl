@@ -1,0 +1,119 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="AnalysisUserService"
+             targetNamespace="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser">
+            <xsd:element name="AnalysisUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user" type="xsd:string"/>
+                        <xsd:element name="typeDevice" type="xsd:string"/>
+                        <xsd:element name="action" type="xsd:string"/>
+                        <xsd:element name="duringAction" type="xsd:long"/>
+                        <xsd:element name="timestamp" type="xsd:string"/> <!-- Potresti usare un tipo di data/ora specifico -->
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="measurement" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="timeRangeStart" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="timeRangeEnd" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="whereClause" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="offset" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getUsersRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getUsersResponse">
+        <part name="users" element="tns:AnalysisUser"/>
+    </message>
+    <message name="insertUserRequest">
+        <part name="user" element="tns:AnalysisUser"/>
+    </message>
+    <message name="insertUserResponse"/>
+    <message name="updateUserRequest">
+        <part name="user" element="tns:AnalysisUser"/>
+    </message>
+    <message name="updateUserResponse"/>
+    <message name="deleteUserRequest">
+        <part name="userId" type="xsd:string"/>
+    </message>
+    <message name="deleteUserResponse"/>
+
+    <portType name="AnalysisUserServicePortType">
+        <operation name="getUsers">
+            <input message="tns:getUsersRequest"/>
+            <output message="tns:getUsersResponse"/>
+        </operation>
+        <operation name="insertUser">
+            <input message="tns:insertUserRequest"/>
+            <output message="tns:insertUserResponse"/>
+        </operation>
+        <operation name="updateUser">
+            <input message="tns:updateUserRequest"/>
+            <output message="tns:updateUserResponse"/>
+        </operation>
+        <operation name="deleteUser">
+            <input message="tns:deleteUserRequest"/>
+            <output message="tns:deleteUserResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="AnalysisUserServiceBinding" type="tns:AnalysisUserServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getUsers">
+            <soap:operation soapAction="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser/getUsers"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser/insertUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser/updateUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbTS/API/Soap/AnalysisUser/deleteUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="AnalysisUserService">
+        <port name="AnalysisUserServicePort" binding="tns:AnalysisUserServiceBinding">
+            <soap:address location="http://localhost:8080/ws/analysisUserService"/>
+        </port>
+    </service>
+</definitions>

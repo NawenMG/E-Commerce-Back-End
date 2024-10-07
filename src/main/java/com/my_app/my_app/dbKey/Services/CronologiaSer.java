@@ -25,8 +25,8 @@ public class CronologiaSer {
     }
 
     @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
-    public void saveOrUpdate(Carrello carrello) {
-        cronologiaRep.saveOrUpdate(carrello);
+    public void saveOrUpdate(Cronologia cronologia) {
+        cronologiaRep.saveOrUpdate(cronologia);
     }
 
     @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")

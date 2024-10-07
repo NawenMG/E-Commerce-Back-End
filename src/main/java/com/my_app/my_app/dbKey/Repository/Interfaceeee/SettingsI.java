@@ -10,7 +10,7 @@ public interface SettingsI {
     
     List<Settings> search(ParamQuery paramQuery);
     
-    void saveOrUpdate(Carrello carrello);
+    void saveOrUpdate(Settings settings);
     
     Carrello findById(int userID, int productID);
     

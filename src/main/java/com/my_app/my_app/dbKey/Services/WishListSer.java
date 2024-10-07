@@ -24,8 +24,8 @@ public class WishListSer {
     }
 
     @CacheEvict(value = {"caffeineCache", "redisCache"}, key = "#id")
-    public void saveOrUpdate(Carrello carrello) {
-        wishListRep.saveOrUpdate(carrello);
+    public void saveOrUpdate(WishList wishList) {
+        wishListRep.saveOrUpdate(wishList);
     }
 
     @Cacheable(value = {"caffeineCache", "redisCache"}, key = "#id")

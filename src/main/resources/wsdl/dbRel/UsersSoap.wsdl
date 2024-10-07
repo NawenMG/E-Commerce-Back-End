@@ -1,0 +1,120 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbG/API/Soap/Users"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="UsersService"
+             targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Users">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Users">
+            <xsd:element name="Users">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="usersID" type="xsd:int"/>
+                        <xsd:element name="nome" type="xsd:string"/>
+                        <xsd:element name="cognome" type="xsd:string"/>
+                        <xsd:element name="ruolo" type="xsd:string"/>
+                        <xsd:element name="nomeUtente" type="xsd:string"/>
+                        <xsd:element name="email" type="xsd:string"/>
+                        <xsd:element name="password" type="xsd:string"/>
+                        <xsd:element name="immagine" type="xsd:string"/>
+                        <xsd:element name="category" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="condizioneWhere" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="offset" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getUsersRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getUsersResponse">
+        <part name="users" element="tns:Users"/>
+    </message>
+    <message name="insertUserRequest">
+        <part name="user" element="tns:Users"/>
+    </message>
+    <message name="insertUserResponse"/>
+    <message name="updateUserRequest">
+        <part name="user" element="tns:Users"/>
+    </message>
+    <message name="updateUserResponse"/>
+    <message name="deleteUserRequest">
+        <part name="userId" type="xsd:int"/>
+    </message>
+    <message name="deleteUserResponse"/>
+
+    <portType name="UsersServicePortType">
+        <operation name="getUsers">
+            <input message="tns:getUsersRequest"/>
+            <output message="tns:getUsersResponse"/>
+        </operation>
+        <operation name="insertUser">
+            <input message="tns:insertUserRequest"/>
+            <output message="tns:insertUserResponse"/>
+        </operation>
+        <operation name="updateUser">
+            <input message="tns:updateUserRequest"/>
+            <output message="tns:updateUserResponse"/>
+        </operation>
+        <operation name="deleteUser">
+            <input message="tns:deleteUserRequest"/>
+            <output message="tns:deleteUserResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="UsersServiceBinding" type="tns:UsersServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getUsers">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Users/getUsers"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Users/insertUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Users/updateUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteUser">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Users/deleteUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="UsersService">
+        <port name="UsersServicePort" binding="tns:UsersServiceBinding">
+            <soap:address location="http://localhost:8080/ws/users"/>
+        </port>
+    </service>
+</definitions>

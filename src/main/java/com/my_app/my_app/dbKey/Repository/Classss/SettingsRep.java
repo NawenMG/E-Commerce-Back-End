@@ -57,17 +57,17 @@ public class SettingsRep {
     }
 
 
-     // Salva o aggiorna un Carrello
-    public void saveOrUpdate(Carrello carrello) {
-        dynamoDBMapper.save(carrello);
+     // Salva o aggiorna settings
+    public void saveOrUpdate(Settings settings) {
+        dynamoDBMapper.save(settings);
     }
 
-    // Trova un Carrello per userID e productID
+    // Trova settign per userID e productID
     public Carrello findById(int userID, int productID) {
         return dynamoDBMapper.load(Carrello.class, userID, productID);
     }
 
-    // Elimina un Carrello per userID e productID
+    // Elimina settings per userID e productID
     public void deleteById(int userID, int productID) {
         Carrello carrello = findById(userID, productID);
         if (carrello != null) {

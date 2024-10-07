@@ -1,0 +1,93 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://my_app.com/my_app/soap/archiviazioneTransizioni"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://my_app.com/my_app/soap/archiviazioneTransizioni">
+
+    <message name="GetTransizioniRequest">
+        <part name="paramQuery" element="tns:paramQuery"/>
+    </message>
+    <message name="GetTransizioniResponse">
+        <part name="transizioni" element="tns:transizioneList"/>
+    </message>
+
+    <message name="InsertTransizioneRequest">
+        <part name="transizione" element="tns:transizione"/>
+    </message>
+    <message name="InsertTransizioneResponse"/>
+
+    <message name="UpdateTransizioneRequest">
+        <part name="transizione" element="tns:transizione"/>
+    </message>
+    <message name="UpdateTransizioneResponse"/>
+
+    <message name="DeleteTransizioneRequest">
+        <part name="id" element="tns:id"/>
+    </message>
+    <message name="DeleteTransizioneResponse"/>
+
+    <portType name="ArchiviazioneTransizioniPortType">
+        <operation name="getTransizioni">
+            <input message="tns:GetTransizioniRequest"/>
+            <output message="tns:GetTransizioniResponse"/>
+        </operation>
+        <operation name="insertTransizione">
+            <input message="tns:InsertTransizioneRequest"/>
+            <output message="tns:InsertTransizioneResponse"/>
+        </operation>
+        <operation name="updateTransizione">
+            <input message="tns:UpdateTransizioneRequest"/>
+            <output message="tns:UpdateTransizioneResponse"/>
+        </operation>
+        <operation name="deleteTransizione">
+            <input message="tns:DeleteTransizioneRequest"/>
+            <output message="tns:DeleteTransizioneResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ArchiviazioneTransizioniBinding" type="tns:ArchiviazioneTransizioniPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getTransizioni">
+            <soap:operation soapAction="getTransizioni"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertTransizione">
+            <soap:operation soapAction="insertTransizione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updateTransizione">
+            <soap:operation soapAction="updateTransizione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deleteTransizione">
+            <soap:operation soapAction="deleteTransizione"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ArchiviazioneTransizioniService">
+        <port name="ArchiviazioneTransizioniPort" binding="tns:ArchiviazioneTransizioniBinding">
+            <soap:address location="http://localhost:8080/ws/archiviazioneTransizioni"/>
+        </port>
+    </service>
+</definitions>

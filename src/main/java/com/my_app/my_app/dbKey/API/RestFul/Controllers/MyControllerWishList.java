@@ -28,8 +28,8 @@ public class MyControllerWishList {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Void> saveOrUpdate(@RequestBody Carrello carrello) {
-        wishListSer.saveOrUpdate(carrello);
+    public ResponseEntity<Void> saveOrUpdate(@RequestBody WishList wishList) {
+        wishListSer.saveOrUpdate(wishList);
         return ResponseEntity.ok().build();
     }
 

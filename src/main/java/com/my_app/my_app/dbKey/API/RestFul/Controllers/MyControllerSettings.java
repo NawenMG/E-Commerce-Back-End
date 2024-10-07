@@ -28,8 +28,8 @@ public class MyControllerSettings {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Void> saveOrUpdate(@RequestBody Carrello carrello) {
-        settingsSer.saveOrUpdate(carrello);
+    public ResponseEntity<Void> saveOrUpdate(@RequestBody Settings settings) {
+        settingsSer.saveOrUpdate(settings);
         return ResponseEntity.ok().build();
     }
 

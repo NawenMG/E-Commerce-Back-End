@@ -1,0 +1,116 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.my_app.my_app/dbG/API/Soap/Payments"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             name="PaymentsService"
+             targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Payments">
+
+    <types>
+        <xsd:schema targetNamespace="http://www.my_app.my_app/dbG/API/Soap/Payments">
+            <xsd:element name="Payments">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="paymentsID" type="xsd:int"/>
+                        <xsd:element name="type" type="xsd:string"/>
+                        <xsd:element name="data" type="xsd:date"/>
+                        <xsd:element name="status" type="xsd:boolean"/>
+                        <xsd:element name="total" type="xsd:double"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ParamQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="condizioneWhere" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="limit" type="xsd:int" minOccurs="0"/>
+                        <xsd:element name="offset" type="xsd:int" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="getPaymentsRequest">
+        <part name="paramQuery" element="tns:ParamQuery"/>
+    </message>
+    <message name="getPaymentsResponse">
+        <part name="payments" element="tns:Payments"/>
+    </message>
+    <message name="insertPaymentRequest">
+        <part name="payment" element="tns:Payments"/>
+    </message>
+    <message name="insertPaymentResponse"/>
+    <message name="updatePaymentRequest">
+        <part name="payment" element="tns:Payments"/>
+    </message>
+    <message name="updatePaymentResponse"/>
+    <message name="deletePaymentRequest">
+        <part name="paymentId" type="xsd:int"/>
+    </message>
+    <message name="deletePaymentResponse"/>
+
+    <portType name="PaymentsServicePortType">
+        <operation name="getPayments">
+            <input message="tns:getPaymentsRequest"/>
+            <output message="tns:getPaymentsResponse"/>
+        </operation>
+        <operation name="insertPayment">
+            <input message="tns:insertPaymentRequest"/>
+            <output message="tns:insertPaymentResponse"/>
+        </operation>
+        <operation name="updatePayment">
+            <input message="tns:updatePaymentRequest"/>
+            <output message="tns:updatePaymentResponse"/>
+        </operation>
+        <operation name="deletePayment">
+            <input message="tns:deletePaymentRequest"/>
+            <output message="tns:deletePaymentResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="PaymentsServiceBinding" type="tns:PaymentsServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getPayments">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Payments/getPayments"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="insertPayment">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Payments/insertPayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="updatePayment">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Payments/updatePayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="deletePayment">
+            <soap:operation soapAction="http://www.my_app.my_app/dbG/API/Soap/Payments/deletePayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="PaymentsService">
+        <port name="PaymentsServicePort" binding="tns:PaymentsServiceBinding">
+            <soap:address location="http://localhost:8080/ws/payments"/>
+        </port>
+    </service>
+</definitions>

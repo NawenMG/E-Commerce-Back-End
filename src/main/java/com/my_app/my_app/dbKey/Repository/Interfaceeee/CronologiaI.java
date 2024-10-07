@@ -10,7 +10,7 @@ public interface CronologiaI {
     
     List<Cronologia> search(ParamQuery paramQuery);
     
-    void saveOrUpdate(Carrello carrello);
+    void saveOrUpdate(Cronologia cronologia);
     
     Carrello findById(int userID, int productID);
     

@@ -54,17 +54,17 @@ public class CronologiaRep {
         return dynamoDBMapper.query(Cronologia.class, queryExpression);
     }
 
-     // Salva o aggiorna un Carrello
-    public void saveOrUpdate(Carrello carrello) {
-        dynamoDBMapper.save(carrello);
+     // Salva o aggiorna cronologia
+    public void saveOrUpdate(Cronologia cronologia) {
+        dynamoDBMapper.save(cronologia);
     }
 
-    // Trova un Carrello per userID e productID
+    // Trova cronologia per userID e productID
     public Carrello findById(int userID, int productID) {
         return dynamoDBMapper.load(Carrello.class, userID, productID);
     }
 
-    // Elimina un Carrello per userID e productID
+    // Elimina cronologia per userID e productID
     public void deleteById(int userID, int productID) {
         Carrello carrello = findById(userID, productID);
         if (carrello != null) {
