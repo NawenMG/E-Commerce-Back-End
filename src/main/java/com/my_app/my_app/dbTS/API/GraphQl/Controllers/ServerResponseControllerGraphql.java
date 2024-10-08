@@ -6,6 +6,7 @@ import com.my_app.my_app.dbTS.Repository.Classss.ServerResponseRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ServerResponseControllerGraphql {
     private ServerResponseRep serverResponseRep;
 
     @QueryMapping
+    @PreAuthorize("hasRole('ADMIN', 'CONTROLLER')")
     public List<ServerResponse> getServerResponseData(@Argument ParamQuery params) {
         
         return serverResponseRep.query(params);

@@ -4,6 +4,7 @@ import com.my_app.my_app.dbCol.Models.ArchiviazioneTransizioni;
 import com.my_app.my_app.dbCol.Parametri.ParamQuery;
 import com.my_app.my_app.dbCol.Repository.Classsss.ArchiviazioneTransizioniRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import jakarta.jws.WebService;
@@ -15,7 +16,8 @@ public class ArchiviazioneTransizioniService implements com.my_app.my_app.dbCol.
 
     @Autowired
     private ArchiviazioneTransizioniRep transizioniRep;
-
+    
+    @PreAuthorize("hasRole('PAYMENTMAN')")
     public List<ArchiviazioneTransizioni> getTransizioni(ParamQuery paramQuery) {
         return transizioniRep.query(paramQuery);
     }
@@ -28,6 +30,7 @@ public class ArchiviazioneTransizioniService implements com.my_app.my_app.dbCol.
         transizioniRep.updateOrdine(transizione);
     }
 
+    @PreAuthorize("hasRole('PAYMENTMAN')")
     public void deleteTransizione(int id) {
         transizioniRep.deleteOrdine(id);
     }

@@ -4,6 +4,7 @@ import com.my_app.my_app.dbTS.Models.AnalysisUser;
 import com.my_app.my_app.dbTS.Parametri.ParamQuery;
 import com.my_app.my_app.dbTS.Repository.Classss.AnalysisUserRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import jakarta.jws.WebService;
@@ -16,17 +17,17 @@ public class AnalysisUserServiceSoap implements com.my_app.my_app.dbTS.API.Soap.
     @Autowired
     private AnalysisUserRep analysisUserRep;
 
-    @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<AnalysisUser> getUsers(ParamQuery paramQuery) {
         return analysisUserRep.query(paramQuery);
     }
 
-    @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void insertUser(AnalysisUser user) {
         analysisUserRep.insertUser(user);
     }
 
-    @Override
+    @PreAuthorize("hasRole('USER')")
     public void deleteUser(String measurement, String user, long startTime, long endTime) {
         analysisUserRep.deleteData(measurement, user, startTime, endTime);
     }

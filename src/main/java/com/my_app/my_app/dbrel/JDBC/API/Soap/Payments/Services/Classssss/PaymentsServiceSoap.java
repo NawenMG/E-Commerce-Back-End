@@ -6,6 +6,7 @@ import com.my_app.my_app.dbrel.JDBC.parametri.ParamQuery;
 import com.my_app.my_app.dbrel.JDBC.repository.classs.PaymentsRep;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import jakarta.jws.WebService;
@@ -18,18 +19,22 @@ public class PaymentsServiceSoap implements PaymentsServiceSoapI {
     @Autowired
     private PaymentsRep paymentsRep;
 
+    @PreAuthorize("hasRole('USER')")
     public List<Payments> getPayments(ParamQuery paramQuery) {
         return paymentsRep.query(paramQuery);
     }
 
+    @PreAuthorize("hasRole('USER')")
     public void insertPayment(Payments payment) {
         paymentsRep.insertPayment(payment);
     }
 
+    @PreAuthorize("hasRole('USER')")
     public void updatePayment(Payments payment) {
         paymentsRep.updatePayment(payment);
     }
 
+    @PreAuthorize("hasRole('USER')")
     public void deletePayment(int paymentId) {
         paymentsRep.deletePayment(paymentId);
     }

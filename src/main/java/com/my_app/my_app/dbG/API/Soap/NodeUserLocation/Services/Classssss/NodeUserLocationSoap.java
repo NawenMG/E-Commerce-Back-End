@@ -5,6 +5,7 @@ import com.my_app.my_app.dbG.Models.SistemaDiRaccomandazione.NodeUserLocation;
 import com.my_app.my_app.dbG.Parametri.ParamQuery;
 import com.my_app.my_app.dbG.Repository.Classsss.UserLocationRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import jakarta.jws.WebService;
@@ -17,22 +18,22 @@ public class NodeUserLocationSoap implements NodeUserLocationSoapI {
     @Autowired
     private UserLocationRep userLocationRep;
 
-    @Override
+    @PreAuthorize("hasRole('USER')")
     public List<NodeUserLocation> getLocations(ParamQuery paramQuery) {
         return userLocationRep.findByDynamicQuery(paramQuery);
     }
-
-    @Override
+    
+    @PreAuthorize("hasRole('USER')")
     public void insertLocation(NodeUserLocation location) {
         userLocationRep.insertNodeUserLocation(location);
     }
 
-    @Override
+    @PreAuthorize("hasRole('USER')")
     public void updateLocation(NodeUserLocation location) {
         userLocationRep.updateNodeUserLocation(location);
     }
 
-    @Override
+    @PreAuthorize("hasRole('USER')")
     public void deleteLocation(String locationId) {
         userLocationRep.deleteNodeUserLocation(locationId);
     }

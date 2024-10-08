@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -27,6 +28,7 @@ public class ChatControllerX {
     // Metodo per gestire l'invio di un messaggio
     @MessageMapping("/send/message") // Mappatura del messaggio ricevuto
     @SendTo("/topic/messages") // Invia il messaggio a tutti gli utenti connessi a questo topic
+    @PreAuthorize("hasRole('USER')")
     public void sendMessage(MessaggioX messaggio, Principal principal) {
         // Aggiungi l'ID del mittente al messaggio
         messaggio.setMittente(principal.getName());
@@ -42,6 +44,7 @@ public class ChatControllerX {
     // Metodo per ottenere una conversazione per ID
     @MessageMapping("/conversation/{id}")
     @SendTo("/topic/conversation") // Invia la conversazione a tutti gli utenti connessi
+    @PreAuthorize("hasRole('USER')")
     public Conversazione getConversation(String conversazioneID) {
         return chatSer.getConversation(conversazioneID);
     }
@@ -49,6 +52,7 @@ public class ChatControllerX {
     // Metodo per ottenere i messaggi di una conversazione
     @MessageMapping("/messages/{conversazioneID}")
     @SendTo("/topic/messages") // Invia i messaggi a tutti gli utenti connessi
+    @PreAuthorize("hasRole('USER')")
     public List<MessaggioX> getMessages(String conversazioneID) {
         return chatSer.getMessages(conversazioneID);
     }
@@ -56,6 +60,7 @@ public class ChatControllerX {
     // Metodo per ottenere gli utenti di una conversazione
     @MessageMapping("/users/{conversazioneID}")
     @SendTo("/topic/users") // Invia gli utenti a tutti gli utenti connessi
+    @PreAuthorize("hasRole('USER')")
     public List<User> getUsers(String conversazioneID) {
         return chatSer.getConversationUsers(conversazioneID);
     }

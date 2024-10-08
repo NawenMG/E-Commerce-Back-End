@@ -5,6 +5,7 @@ import com.my_app.my_app.dbCol.Models.ArchiviazioneSegnalazioni;
 import com.my_app.my_app.dbCol.Parametri.ParamQuery;
 import com.my_app.my_app.dbCol.Repository.Classsss.ArchiviazioneSegnalazioniRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import jakarta.jws.WebService;
@@ -16,8 +17,9 @@ public class ArchiviazioneSegnalazioniService implements ArchiviazioneSegnalazio
 
     @Autowired
     private ArchiviazioneSegnalazioniRep segnalazioniRep;
- 
+    
     //Soliti 4 metodi
+    @PreAuthorize("hasRole('ADMIN', 'CONTROLLER')")
     public List<ArchiviazioneSegnalazioni> getSegnalazioni(ParamQuery paramQuery) {
         return segnalazioniRep.query(paramQuery);
     }
@@ -29,7 +31,8 @@ public class ArchiviazioneSegnalazioniService implements ArchiviazioneSegnalazio
     public void updateSegnalazione(ArchiviazioneSegnalazioni segnalazione) {
         segnalazioniRep.updateOrdine(segnalazione);
     }
-
+    
+    @PreAuthorize("hasRole('ADMIN', 'CONTROLLER')")
     public void deleteSegnalazione(int id) {
         segnalazioniRep.deleteOrdine(id);
     }

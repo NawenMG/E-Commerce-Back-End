@@ -35,7 +35,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // Verifica che l'header sia presente e inizi con "Bearer "
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7); // Rimuovi "Bearer " dal token
+            jwt = authorizationHeader.substring(7); 
             username = jwtUtil.extractUsername(jwt); // Estrai il nome utente dal token JWT
         }
 
